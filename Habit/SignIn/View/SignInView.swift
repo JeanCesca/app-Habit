@@ -108,7 +108,7 @@ extension SignInView {
             ZStack {
                 
                 NavigationLink(tag: 1, selection: $action, destination: {
-                    EmptyView()
+                    viewModel.signUpView()
                 }) {
                     EmptyView()
                 }
