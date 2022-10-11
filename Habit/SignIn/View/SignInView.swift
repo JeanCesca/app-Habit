@@ -19,48 +19,63 @@ struct SignInView: View {
     
     var body: some View {
         
-        NavigationView {
+        if case SignInUIState.goToHomeScreen = viewModel.uiState {
+            viewModel.homeView()
             
-            ScrollView(showsIndicators: false) {
+        } else {
+            NavigationView {
                 
-                VStack(alignment: .center) {
-                    Image("doglogin")
-                        .resizable()
-                        .scaledToFit()
-                        .padding(.horizontal, 60)
-                        .padding(.top, 100)
-                        .padding(.bottom, 20)
+                ScrollView(showsIndicators: false) {
                     
-                    Text("Login")
-                        .foregroundColor(.orange)
-                        .font(Font.system(.title2).bold())
-                        .padding(.bottom, 8)
+                    VStack(alignment: .center) {
+                        Image("doglogin")
+                            .resizable()
+                            .scaledToFit()
+                            .padding(.horizontal, 60)
+                            .padding(.top, 100)
+                            .padding(.bottom, 20)
+                        
+                        Text("Login")
+                            .foregroundColor(.orange)
+                            .font(Font.system(.title2).bold())
+                            .padding(.bottom, 8)
+                        
+                        emailField
+                        
+                        passwordField
+                        
+                        enterButton
+                        
+                        registerLink
+                        
+                        Text("Copyright @YYY")
+                            .foregroundColor(.gray)
+                            .font(.system(size: 16).monospacedDigit())
+                            .padding(.top, 120)
+                    }
                     
-                    numberField
+                    if case SignInUIState.error(let value) = viewModel.uiState {
+                        Text("")
+                            .alert(isPresented: .constant(true)) {
+                                Alert(title: Text("Erro!"), message: Text(value), dismissButton: .default(Text("Ok")) {
+                                    //faz algo quando some o alerta
+                                })
+                            }
+                    }
                     
-                    passwordField
-                    
-                    enterButton
-                    
-                    registerLink
-                    
-                    Text("Copyright @YYY")
-                        .foregroundColor(.gray)
-                        .font(.system(size: 16).monospacedDigit())
-                        .padding(.top, 120)
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding(.horizontal, 20)
+                .background(.white)
+                .navigationTitle("Login").navigationBarTitleDisplayMode(.inline)
+                .navigationBarHidden(navigationHidden)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .padding(.horizontal, 20)
-            .background(.white)
-            .navigationTitle("Login").navigationBarTitleDisplayMode(.inline)
-            .navigationBarHidden(navigationHidden)
         }
     }
 }
-    
-    extension SignInView {
-        var numberField: some View {
+
+extension SignInView {
+    var emailField: some View {
         TextField("seu usuário", text: $email)
             .border(.gray, width: 1)
             .cornerRadius(10)
@@ -78,7 +93,7 @@ extension SignInView {
 extension SignInView {
     var enterButton: some View {
         Button("Entrar") {
-            //evento de clique
+            viewModel.login(email: email, password: password)
         }
     }
 }
@@ -102,7 +117,6 @@ extension SignInView {
                     self.action = 1
                 }
             }
-            
         }
     }
 }
