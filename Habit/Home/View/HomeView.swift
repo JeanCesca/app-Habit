@@ -19,7 +19,6 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = HomeViewModel()
-        HomeView(viewModel: viewModel)
+        HomeView(viewModel: HomeViewModel())
     }
 }

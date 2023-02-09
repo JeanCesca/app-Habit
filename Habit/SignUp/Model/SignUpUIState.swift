@@ -1,5 +1,5 @@
 //
-//  SignInUIState.swift
+//  SignUpUIState.swift
 //  Habit
 //
 //  Created by Jean Ricardo Cesca on 11/10/22.
@@ -7,11 +7,9 @@
 
 import Foundation
 
-enum SignInUIState {
-
-    case none //estado ocioso
+enum SignUpUIState {
+    case none
     case loading
-    case goToHomeScreen
+    case success
     case error(String)
-    
 }

@@ -25,25 +25,31 @@ struct SplashView: View {
                 loadingView(error: errorMessage)
     //            Text("Mostrar erro \(errorMessage)")
             }
-        }.onAppear {
+        }
+        .onAppear {
             viewModel.onAppear()
         }
     }
 }
 
+//Funções em extensões
 extension SplashView {
     func loadingView(error: String? = nil) -> some View {
         ZStack {
-            Image("dog")
-                .resizable()
-                .scaledToFill()
+            Color.white
                 .ignoresSafeArea()
-//                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            ZStack {
+                Image("doglogin")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 200, height: 200)
+            }
+
             
             if let error = error {
                 Text("")
                     .alert(isPresented: .constant(true)) {
-                        Alert(title: Text("Erro!"), message: Text(error), dismissButton: .default(Text("Ok")) {
+                        Alert(title: Text("Habit"), message: Text(error), dismissButton: .default(Text("Ok")) {
                             //faz algo quando some o alerta
                         })
                     }
@@ -52,18 +58,36 @@ extension SplashView {
     }
 }
 
+//Variáveis em extensões
+extension SplashView {
+    var loading: some View {
+        ZStack {
+            Color.clear
+                .ignoresSafeArea()
+            ZStack {
+                Image("doglogin")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 200, height: 200)
+            }
+        }
+            
+    }
+}
+
 //Compartilhamento de objetos
-//struct LoadingView: View {
-//    var body: some View {
-//        ZStack {
-//            Image("dog")
-//                .resizable()
-//                .scaledToFill()
-//                .ignoresSafeArea()
-//                .frame(width: .infinity, height: .infinity, alignment: .center)
-//        }
-//    }
-//}
+struct LoadingView: View {
+    
+    var body: some View {
+        ZStack {
+            Image("dog")
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+                .frame(width: .infinity, height: .infinity, alignment: .center)
+        }
+    }
+}
 
 struct SplashView_Previews: PreviewProvider {
     static var previews: some View {

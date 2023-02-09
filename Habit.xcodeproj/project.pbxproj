@@ -21,6 +21,13 @@
 		0F4A210C28F5C131009DCE98 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A210B28F5C131009DCE98 /* HomeView.swift */; };
 		0F4A210E28F5C13E009DCE98 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A210D28F5C13E009DCE98 /* HomeViewModel.swift */; };
 		0F4A211428F5DA73009DCE98 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A211328F5DA73009DCE98 /* SignUpView.swift */; };
+		0F4A211828F5DF02009DCE98 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A211728F5DF02009DCE98 /* Gender.swift */; };
+		0F4A211A28F5E3D0009DCE98 /* SignUpUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A211928F5E3D0009DCE98 /* SignUpUIState.swift */; };
+		0F4A211C28F5E41B009DCE98 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A211B28F5E41B009DCE98 /* SignUpViewModel.swift */; };
+		0F4A211E28F5E486009DCE98 /* SignUpViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A211D28F5E486009DCE98 /* SignUpViewRouter.swift */; };
+		0FACA0272995325900B5D3BB /* SignTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA0262995325900B5D3BB /* SignTextField.swift */; };
+		0FACA02A299536F900B5D3BB /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA029299536F900B5D3BB /* PasswordTextField.swift */; };
+		0FACA03029953E4000B5D3BB /* SaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA02F29953E4000B5D3BB /* SaveButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +46,13 @@
 		0F4A210B28F5C131009DCE98 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		0F4A210D28F5C13E009DCE98 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		0F4A211328F5DA73009DCE98 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		0F4A211728F5DF02009DCE98 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
+		0F4A211928F5E3D0009DCE98 /* SignUpUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUIState.swift; sourceTree = "<group>"; };
+		0F4A211B28F5E41B009DCE98 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		0F4A211D28F5E486009DCE98 /* SignUpViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewRouter.swift; sourceTree = "<group>"; };
+		0FACA0262995325900B5D3BB /* SignTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignTextField.swift; sourceTree = "<group>"; };
+		0FACA029299536F900B5D3BB /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
+		0FACA02F29953E4000B5D3BB /* SaveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,10 +85,11 @@
 		0F1C9A6D28F4D2BC00426F9A /* Habit */ = {
 			isa = PBXGroup;
 			children = (
+				0FACA0282995325E00B5D3BB /* Components */,
+				0F1C9A7C28F4D2F200426F9A /* Splash */,
+				0F4A20F828F59E82009DCE98 /* SignIn */,
 				0F4A210F28F5DA52009DCE98 /* SignUp */,
 				0F4A210728F5C118009DCE98 /* Home */,
-				0F4A20F828F59E82009DCE98 /* SignIn */,
-				0F1C9A7C28F4D2F200426F9A /* Splash */,
 				0F1C9A6E28F4D2BC00426F9A /* HabitApp.swift */,
 				0F1C9A7228F4D2BD00426F9A /* Assets.xcassets */,
 				0F1C9A7428F4D2BD00426F9A /* Preview Content */,
@@ -206,6 +221,8 @@
 		0F4A211028F5DA58009DCE98 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0F4A211728F5DF02009DCE98 /* Gender.swift */,
+				0F4A211928F5E3D0009DCE98 /* SignUpUIState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -221,8 +238,20 @@
 		0F4A211228F5DA5F009DCE98 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				0F4A211B28F5E41B009DCE98 /* SignUpViewModel.swift */,
+				0F4A211D28F5E486009DCE98 /* SignUpViewRouter.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0FACA0282995325E00B5D3BB /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0FACA0262995325900B5D3BB /* SignTextField.swift */,
+				0FACA029299536F900B5D3BB /* PasswordTextField.swift */,
+				0FACA02F29953E4000B5D3BB /* SaveButton.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,12 +326,19 @@
 			files = (
 				0F1C9A8328F4D40300426F9A /* SplashUIState.swift in Sources */,
 				0F4A210E28F5C13E009DCE98 /* HomeViewModel.swift in Sources */,
+				0FACA02A299536F900B5D3BB /* PasswordTextField.swift in Sources */,
 				0F1C9A6F28F4D2BC00426F9A /* HabitApp.swift in Sources */,
+				0F4A211E28F5E486009DCE98 /* SignUpViewRouter.swift in Sources */,
 				0F4A20FF28F5A16B009DCE98 /* SignInViewModel.swift in Sources */,
 				0F4A211428F5DA73009DCE98 /* SignUpView.swift in Sources */,
+				0FACA0272995325900B5D3BB /* SignTextField.swift in Sources */,
 				0F4A210C28F5C131009DCE98 /* HomeView.swift in Sources */,
 				0F4A210628F5C0D0009DCE98 /* SignInViewRouter.swift in Sources */,
+				0F4A211C28F5E41B009DCE98 /* SignUpViewModel.swift in Sources */,
+				0F4A211A28F5E3D0009DCE98 /* SignUpUIState.swift in Sources */,
+				0FACA03029953E4000B5D3BB /* SaveButton.swift in Sources */,
 				0F1C9A8128F4D34700426F9A /* SplashView.swift in Sources */,
+				0F4A211828F5DF02009DCE98 /* Gender.swift in Sources */,
 				0F4A20F628F595CC009DCE98 /* SplashViewModel.swift in Sources */,
 				0F4A210428F5B85F009DCE98 /* SignInUIState.swift in Sources */,
 				0F4A210128F5A286009DCE98 /* SplashViewRouter.swift in Sources */,
@@ -450,9 +486,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.habit.jeancesca.Habit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -479,9 +518,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.habit.jeancesca.Habit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
