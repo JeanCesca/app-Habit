@@ -28,7 +28,7 @@ struct LoadingButtonView: View {
                     .font(.title3)
                     .fontWeight(.semibold)
                     .background(
-                        disabled ? Color.orange.opacity(0.6) : Color("lightOrange")
+                        disabled ? Color("buttonColor").opacity(0.5) : Color("buttonColor")
                     )
                     .cornerRadius(20)
             }

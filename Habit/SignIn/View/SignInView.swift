@@ -10,17 +10,15 @@ import SwiftUI
 
 struct SignInView: View {
     
-    @ObservedObject var viewModel: SignInViewModel
+    @ObservedObject var vm: SignInViewModel
     
-    @State private var email: String = ""
-    @State private var password: String = ""
-    @State private var action: Int? = 0
-    @State private var navigationHidden: Bool = true
+    @State var action: Int? = 0
+    @State var navigationHidden: Bool = true
     
     var body: some View {
         ZStack {
-            if case SignInUIState.goToHomeScreen = viewModel.uiState {
-                viewModel.homeView()
+            if case SignInUIState.goToHomeScreen = vm.uiState {
+                vm.homeView()
             } else {
                 NavigationView {
                     ScrollView(showsIndicators: false) {
@@ -31,7 +29,7 @@ struct SignInView: View {
                         registerFields
                         copyright
                         
-                        if case SignInUIState.error(let value) = viewModel.uiState {
+                        if case SignInUIState.error(let value) = vm.uiState {
                             showAlert(value: value)
                         }
                     }
@@ -59,51 +57,51 @@ extension SignInView {
 extension SignInView {
     var emailTextField: some View {
         EditTextView(
-            placeholder: "E-mail",
+            placeholder: "✉️ E-mail",
             error: "E-mail inválido",
-            failure: !email.isEmail(),
+            failure: !vm.email.isEmail(),
             keyboard: .emailAddress,
             isSecure: false,
-            text: $email)
+            text: $vm.email)
     }
 }
 
 extension SignInView {
     var passwordTextField: some View {
         EditTextView(
-            placeholder: "Password",
+            placeholder: "🔑 Password",
             error: "Senha deve ter ao menos 8 caracteres.",
-            failure: password.count < 8,
+            failure: vm.password.count < 8,
             keyboard: .emailAddress,
             isSecure: true,
-            text: $password)
+            text: $vm.password)
     }
 }
 
 extension SignInView {
     var enterButton: some View {
         LoadingButtonView(action: {
-            viewModel.login(email: email, password: password)
+            vm.login()
         },
         text: "Entrar",
-        showProgressBar: self.viewModel.uiState == SignInUIState.loading,
-        disabled: !email.isEmail() || password.count < 8)
+        showProgressBar: self.vm.uiState == SignInUIState.loading,
+                          disabled: !vm.email.isEmail() || vm.password.count < 8)
     }
 }
 
 extension SignInView {
     var registerFields: some View {
         VStack {
-            Text("Ainda não possui um login ativo?")
+            Text("Não possui um login ativo?")
                 .foregroundColor(.gray)
                 .padding(.top)
             ZStack {
                 NavigationLink(tag: 1, selection: $action, destination: {
-                    viewModel.signUpView()
+                    vm.signUpView()
                 }) {
                     EmptyView()
                 }
-                Button("Realize seu cadastro") {
+                Button("Cadastre-se!") {
                     self.action = 1
                 }
             }
@@ -137,7 +135,7 @@ extension SignInView {
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(ColorScheme.allCases, id: \.self) {
-            SignInView(viewModel: SignInViewModel())
+            SignInView(vm: SignInViewModel())
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .preferredColorScheme($0)
                 .previewLayout(.sizeThatFits)

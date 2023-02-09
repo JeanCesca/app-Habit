@@ -19,10 +19,11 @@ struct SaveButton: View {
         }
         .frame(maxWidth: .infinity)
         .frame(height: 20)
-        .foregroundColor(.white)
+        .foregroundColor(Color("buttonText"))
         .padding()
-        .background(Color.blue)
+        .background(Color("buttonColor"))
         .cornerRadius(20)
+        .padding(.top, 16)
     }
 }
 

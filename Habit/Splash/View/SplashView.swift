@@ -10,15 +10,15 @@ import SwiftUI
 
 struct SplashView: View {
         
-    @ObservedObject var viewModel: SplashViewModel
+    @ObservedObject var vm: SplashViewModel
     
     var body: some View {
         Group {
-            switch viewModel.uiState {
+            switch vm.uiState {
             case .loading:
                 loadingView()
             case .goToSignInScreen:
-                viewModel.signInView()
+                vm.signInView()
             case .goToHomeScreen:
                 Text("Carregar tela home")
             case .error(let errorMessage):
@@ -27,7 +27,7 @@ struct SplashView: View {
             }
         }
         .onAppear {
-            viewModel.onAppear()
+            vm.onAppear()
         }
     }
 }
@@ -36,15 +36,10 @@ struct SplashView: View {
 extension SplashView {
     func loadingView(error: String? = nil) -> some View {
         ZStack {
-            Color.white
-                .ignoresSafeArea()
-            ZStack {
-                Image("doglogin")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 200, height: 200)
-            }
-
+            Image("doglogin")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 200, height: 200)
             
             if let error = error {
                 Text("")
@@ -62,22 +57,16 @@ extension SplashView {
 extension SplashView {
     var loading: some View {
         ZStack {
-            Color.clear
-                .ignoresSafeArea()
-            ZStack {
-                Image("doglogin")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 200, height: 200)
-            }
+            Image("doglogin")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 200, height: 200)
         }
-            
     }
 }
 
 //Compartilhamento de objetos
 struct LoadingView: View {
-    
     var body: some View {
         ZStack {
             Image("dog")
@@ -91,7 +80,7 @@ struct LoadingView: View {
 
 struct SplashView_Previews: PreviewProvider {
     static var previews: some View {
-        SplashView(viewModel: SplashViewModel())
+        SplashView(vm: SplashViewModel())
     }
 }
 

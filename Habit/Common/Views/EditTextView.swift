@@ -38,11 +38,10 @@ struct EditTextView: View {
             if let error = error, failure == true, !text.isEmpty {
                 ZStack {
                     Text(error)
-                        .foregroundColor(.red.opacity(0.8))
+                        .foregroundColor(Color("buttonColor").opacity(0.5))
                 }
             }
         }
-        .padding(.bottom, 10)
     }
 }
 
@@ -50,7 +49,7 @@ struct EditTextView_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(ColorScheme.allCases, id: \.self) {
             VStack {
-                EditTextView(placeholder: "E-mail", error: "Campo inválido", failure: .random(), isSecure: .random(), text: .constant("aa"))
+                EditTextView(placeholder: "E-mail", error: "Campo inválido", failure: .random(), isSecure: .random(), text: .constant(""))
                     .padding()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
