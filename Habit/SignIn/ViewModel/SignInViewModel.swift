@@ -29,7 +29,7 @@ class SignInViewModel: ObservableObject {
         self.uiState = .loading
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.uiState = .goToHomeScreen
+            self.uiState = .error("Erro")
         }
     }
     

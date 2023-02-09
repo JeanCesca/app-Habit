@@ -30,16 +30,16 @@ struct SignUpView: View {
                             .font(Font.system(.title).bold())
                             .padding(.bottom, 20)
                         
-                        SignTextField(searchText: $fullName, textFieldTitle: "Nome completo")
-                        SignTextField(searchText: $email, textFieldTitle: "E-mail")
-                        PasswordTextField(searchText: $password, textFieldTitle: "Senha")
-                        SignTextField(searchText: $document, textFieldTitle: "Documento")
-                        SignTextField(searchText: $phone, textFieldTitle: "Telefone")
-                        SignTextField(searchText: $birthday, textFieldTitle: "Documento")
-                        signUpPicker
-                        SaveButton(text: "Realize seu cadastro") {
-                            viewModel.signUp()
-                        }
+//                        SignTextField(searchText: $fullName, textFieldTitle: "Nome completo")
+//                        SignTextField(searchText: $email, textFieldTitle: "E-mail")
+//                        PasswordTextField(searchText: $password, textFieldTitle: "Senha")
+//                        SignTextField(searchText: $document, textFieldTitle: "Documento")
+//                        SignTextField(searchText: $phone, textFieldTitle: "Telefone")
+//                        SignTextField(searchText: $birthday, textFieldTitle: "Documento")
+//                        signUpPicker
+//                        SaveButton(text: "Realize seu cadastro") {
+//                            viewModel.signUp()
+//                        }
                     }
                     Spacer()
                 }

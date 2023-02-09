@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SignInUIState {
+enum SignInUIState: Equatable {
 
     case none //estado ocioso
     case loading

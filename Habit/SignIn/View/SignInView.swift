@@ -24,7 +24,10 @@ struct SignInView: View {
             } else {
                 NavigationView {
                     ScrollView(showsIndicators: false) {
-                        loginFields
+                        imageLogo
+                        emailTextField
+                        passwordTextField
+                        enterButton
                         registerFields
                         copyright
                         
@@ -34,7 +37,6 @@ struct SignInView: View {
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .padding(.horizontal)
-                    .background(.white)
                     .navigationTitle("Login").navigationBarTitleDisplayMode(.inline)
                     .navigationBarHidden(navigationHidden)
                 }
@@ -44,19 +46,48 @@ struct SignInView: View {
 }
 
 extension SignInView {
-    var loginFields: some View {
+    var imageLogo: some View {
         VStack(alignment: .center) {
             Image("doglogin")
                 .resizable()
                 .scaledToFit()
                 .padding(80)
-            
-            SignTextField(searchText: $email, textFieldTitle: "Seu usuário")
-            PasswordTextField(searchText: $password, textFieldTitle: "Senha")
-            Button("Entrar") {
-                viewModel.login(email: email, password: password)
-            }
         }
+    }
+}
+
+extension SignInView {
+    var emailTextField: some View {
+        EditTextView(
+            placeholder: "E-mail",
+            error: "E-mail inválido",
+            failure: !email.isEmail(),
+            keyboard: .emailAddress,
+            isSecure: false,
+            text: $email)
+    }
+}
+
+extension SignInView {
+    var passwordTextField: some View {
+        EditTextView(
+            placeholder: "Password",
+            error: "Senha deve ter ao menos 8 caracteres.",
+            failure: password.count < 8,
+            keyboard: .emailAddress,
+            isSecure: true,
+            text: $password)
+    }
+}
+
+extension SignInView {
+    var enterButton: some View {
+        LoadingButtonView(action: {
+            viewModel.login(email: email, password: password)
+        },
+        text: "Entrar",
+        showProgressBar: self.viewModel.uiState == SignInUIState.loading,
+        disabled: !email.isEmail() || password.count < 8)
     }
 }
 
@@ -65,14 +96,8 @@ extension SignInView {
         VStack {
             Text("Ainda não possui um login ativo?")
                 .foregroundColor(.gray)
-                .padding(.top, 48)
+                .padding(.top)
             ZStack {
-//                NavigationLink {
-//                    viewModel.signUpView()
-//                } label: {
-//                    Text("Clique aqui")
-//                }
-
                 NavigationLink(tag: 1, selection: $action, destination: {
                     viewModel.signUpView()
                 }) {
@@ -111,6 +136,11 @@ extension SignInView {
 
 struct SignInView_Previews: PreviewProvider {
     static var previews: some View {
-        SignInView(viewModel: SignInViewModel())
+        ForEach(ColorScheme.allCases, id: \.self) {
+            SignInView(viewModel: SignInViewModel())
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .preferredColorScheme($0)
+                .previewLayout(.sizeThatFits)
+        }
     }
 }
