@@ -85,7 +85,7 @@ extension SignInView {
         },
         text: "Entrar",
         showProgressBar: self.vm.uiState == SignInUIState.loading,
-                          disabled: !vm.email.isEmail() || vm.password.count < 8)
+        disabled: !vm.email.isEmail() || vm.password.count < 8)
     }
 }
 

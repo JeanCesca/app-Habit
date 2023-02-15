@@ -9,22 +9,28 @@ import Foundation
 
 enum WebService {
     
-    /*
-    {
-      "name": "jean30",
-      "email": "jean30@gmail.com",
-      "document": "12345678910",
-      "phone": "11993938998",
-      "gender": 0,
-      "birthday": "2013-02-14",
-      "password": "12345678"
-    }
-     */
-    
     //construir a URL:
     enum Endpoint: String {
         case base = "https://habitplus-api.tiagoaguiar.co"
         case postUser = "/users"
+        case loginUser = "/auth/login"
+    }
+    
+    enum NetworkError {
+        case badRequest
+        case notFound
+        case unAuthorized
+        case internalServerError
+    }
+    
+    enum Result {
+        case success(Data)
+        case failure(NetworkError, Data?)
+    }
+    
+    enum ContentType: String {
+        case json = "application/json"
+        case formUrl = "application/x-www-form-urlencoded"
     }
     
     private static func completeUrl(path: Endpoint) -> URLRequest? {
@@ -32,39 +38,121 @@ enum WebService {
         return URLRequest(url: url)
     }
     
-    static func postUser(request: SignUpRequest) {
-        
-        // 0. Criar um objeto JSON
-        //abrir uma requisição e enviar os valores dos par6ametros, e esperar um valor
-        guard let jsonData = try? JSONEncoder().encode(request) else { return }
-        
+    private static func requestCall(
+        path: Endpoint,
+        contentType: ContentType,
+        data: Data?,
+        completion: @escaping (Result) -> Void
+    ) {
         // 1. criar uma URL que irá esperar os valores do JSON
-        guard var urlRequest = completeUrl(path: .postUser) else { return }
+        guard var urlRequest = completeUrl(path: path) else { return }
         //definir as propriedades para a CHAMADA da URL
         //REQUEST
         urlRequest.httpMethod = "POST"
         urlRequest.setValue("application/json", forHTTPHeaderField: "accept")
-        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        urlRequest.httpBody = jsonData
+        urlRequest.setValue(contentType.rawValue, forHTTPHeaderField: "Content-Type")
+        urlRequest.httpBody = data //formato FormData: chave=valor&chave=valor
         
         // 2. Conectar com o servidor para ter uma resposta de volta (RESPONSE)
         URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             guard let data = data, error == nil else {
-                print(error)
+                completion(.failure(.internalServerError, nil))
                 return
             }
             
-            //Decodificar o JSON (que está em Data)
-            print(String(data: data, encoding: .utf8))
-            print("response\n")
-            print(response)
-            
+//            print(String(data: data, encoding: .utf8))
+
             if let response = response as? HTTPURLResponse {
-                print(response.statusCode)
+//                print(response)
+                switch response.statusCode {
+                case 200:
+                    completion(.success(data))
+                case 400:
+                    completion(.failure(.badRequest, data))
+                case 401:
+                    completion(.failure(.unAuthorized, data))
+                default:
+                    break
+                }
             }
         }.resume()
     }
     
+    private static func requestCall_JSON<T: Encodable>(
+        path: Endpoint,
+        body: T,
+        completion: @escaping ((Result) -> Void)
+    ) {
+        // 0. Criar um objeto JSON
+        //abrir uma requisição e enviar os valores dos par6ametros, e esperar um valor
+        guard let jsonData = try? JSONEncoder().encode(body) else { return }
+        
+        requestCall(
+            path: path,
+            contentType: .json,
+            data: jsonData,
+            completion: completion)
+    }
     
+    private static func requestCall_FormatData(
+        path: Endpoint,
+        params: [URLQueryItem],
+        completion: @escaping ((Result) -> Void)
+    ) {
+        
+        guard let urlRequest = completeUrl(path: path) else { return }
+        guard let absoluteUrl = urlRequest.url?.absoluteString else { return }
+        
+        var components = URLComponents(string: absoluteUrl)
+        components?.queryItems = params
+                
+        requestCall(
+            path: path,
+            contentType: .formUrl,
+            data: components?.query?.data(using: .utf8),
+            completion: completion)
+    }
     
+    static func registerUser(request: SignUpRequest, completion: @escaping (Bool?, ErrorResponse?) -> Void) {
+        requestCall_JSON(path: .postUser, body: request) { result in
+            //Result é o resultado da Data (JSON) ou do Erro do servidor, que preciso Decodar
+            switch result {
+            case .success(let data):
+//                print(String(data: data, encoding: .utf8))
+                completion(true, nil)
+            case .failure(_, let data):
+                if let data = data {
+//                    print(String(data: data, encoding: .utf8))
+                    let response = try? JSONDecoder().decode(ErrorResponse.self, from: data)
+                    //delegar essa response para a ViewModel
+                    completion(nil, response)
+                }
+            }
+        }
+        
+    }
+    
+    static func loginUser(request: SignInRequest, completion: @escaping (SignInResponse?, SignInErrorResponse?) -> Void) {
+                
+        requestCall_FormatData(path: .loginUser, params: [
+            URLQueryItem(name: "username", value: request.email),
+            URLQueryItem(name: "password", value: request.password)
+        ]) { result in
+            switch result {
+            case .success(let data):
+//                print(String(data: data, encoding: .utf8)!)
+                let response = try? JSONDecoder().decode(SignInResponse.self, from: data)
+//                print("RESPONSE ===== \(response)")
+                completion(response, nil)
+            case .failure(let error, let data):
+                if let data = data {
+                    if error == .unAuthorized {
+//                        print(String(data: data, encoding: .utf8))
+                        let response = try? JSONDecoder().decode(SignInErrorResponse.self, from: data)
+                        completion(nil, response)
+                    }
+                }
+            }
+        }
+    }
 }

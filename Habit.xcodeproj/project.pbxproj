@@ -27,6 +27,11 @@
 		0F4A211E28F5E486009DCE98 /* SignUpViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A211D28F5E486009DCE98 /* SignUpViewRouter.swift */; };
 		0F63F6D5299D0FE900B633B8 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F6D4299D0FE900B633B8 /* WebService.swift */; };
 		0F63F6D7299D18A500B633B8 /* SignUpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F6D6299D18A500B633B8 /* SignUpRequest.swift */; };
+		0F63F6D9299D2A1500B633B8 /* SignUpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F6D8299D2A1500B633B8 /* SignUpResponse.swift */; };
+		0F63F6DB299D2BDF00B633B8 /* ErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F6DA299D2BDF00B633B8 /* ErrorResponse.swift */; };
+		0F63F6DD299D33C100B633B8 /* SignInRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F6DC299D33C100B633B8 /* SignInRequest.swift */; };
+		0F63F6DF299D350300B633B8 /* SignInResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F6DE299D350300B633B8 /* SignInResponse.swift */; };
+		0F63F6E2299D52C400B633B8 /* SignInErrorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F6E1299D52C400B633B8 /* SignInErrorResponse.swift */; };
 		0FACA03029953E4000B5D3BB /* SaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA02F29953E4000B5D3BB /* SaveButton.swift */; };
 		0FACA033299562BB00B5D3BB /* EditTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA032299562BB00B5D3BB /* EditTextView.swift */; };
 		0FACA036299576AA00B5D3BB /* CustomTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA035299576AA00B5D3BB /* CustomTextFieldStyle.swift */; };
@@ -56,6 +61,12 @@
 		0F4A211D28F5E486009DCE98 /* SignUpViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewRouter.swift; sourceTree = "<group>"; };
 		0F63F6D4299D0FE900B633B8 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		0F63F6D6299D18A500B633B8 /* SignUpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequest.swift; sourceTree = "<group>"; };
+		0F63F6D8299D2A1500B633B8 /* SignUpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponse.swift; sourceTree = "<group>"; };
+		0F63F6DA299D2BDF00B633B8 /* ErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorResponse.swift; sourceTree = "<group>"; };
+		0F63F6DC299D33C100B633B8 /* SignInRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInRequest.swift; sourceTree = "<group>"; };
+		0F63F6DE299D350300B633B8 /* SignInResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInResponse.swift; sourceTree = "<group>"; };
+		0F63F6E0299D4B2C00B633B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0F63F6E1299D52C400B633B8 /* SignInErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInErrorResponse.swift; sourceTree = "<group>"; };
 		0FACA02F29953E4000B5D3BB /* SaveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButton.swift; sourceTree = "<group>"; };
 		0FACA032299562BB00B5D3BB /* EditTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextView.swift; sourceTree = "<group>"; };
 		0FACA035299576AA00B5D3BB /* CustomTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldStyle.swift; sourceTree = "<group>"; };
@@ -93,6 +104,7 @@
 		0F1C9A6D28F4D2BC00426F9A /* Habit */ = {
 			isa = PBXGroup;
 			children = (
+				0F63F6E0299D4B2C00B633B8 /* Info.plist */,
 				0FACA0282995325E00B5D3BB /* Common */,
 				0F1C9A7C28F4D2F200426F9A /* Splash */,
 				0F4A20F828F59E82009DCE98 /* SignIn */,
@@ -171,6 +183,9 @@
 			isa = PBXGroup;
 			children = (
 				0F4A210328F5B85F009DCE98 /* SignInUIState.swift */,
+				0F63F6DC299D33C100B633B8 /* SignInRequest.swift */,
+				0F63F6DE299D350300B633B8 /* SignInResponse.swift */,
+				0F63F6E1299D52C400B633B8 /* SignInErrorResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -231,6 +246,7 @@
 			children = (
 				0F4A211928F5E3D0009DCE98 /* SignUpUIState.swift */,
 				0F63F6D6299D18A500B633B8 /* SignUpRequest.swift */,
+				0F63F6D8299D2A1500B633B8 /* SignUpResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -294,6 +310,7 @@
 			isa = PBXGroup;
 			children = (
 				0F4A211728F5DF02009DCE98 /* Gender.swift */,
+				0F63F6DA299D2BDF00B633B8 /* ErrorResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -380,13 +397,17 @@
 				0F1C9A8328F4D40300426F9A /* SplashUIState.swift in Sources */,
 				0F4A210E28F5C13E009DCE98 /* HomeViewModel.swift in Sources */,
 				0F1C9A6F28F4D2BC00426F9A /* HabitApp.swift in Sources */,
+				0F63F6D9299D2A1500B633B8 /* SignUpResponse.swift in Sources */,
+				0F63F6DB299D2BDF00B633B8 /* ErrorResponse.swift in Sources */,
 				0F4A211E28F5E486009DCE98 /* SignUpViewRouter.swift in Sources */,
 				0FACA036299576AA00B5D3BB /* CustomTextFieldStyle.swift in Sources */,
 				0FACA03C29957F6800B5D3BB /* LoadingButtonView.swift in Sources */,
+				0F63F6E2299D52C400B633B8 /* SignInErrorResponse.swift in Sources */,
 				0F4A20FF28F5A16B009DCE98 /* SignInViewModel.swift in Sources */,
 				0F4A211428F5DA73009DCE98 /* SignUpView.swift in Sources */,
 				0F4A210C28F5C131009DCE98 /* HomeView.swift in Sources */,
 				0F4A210628F5C0D0009DCE98 /* SignInViewRouter.swift in Sources */,
+				0F63F6DD299D33C100B633B8 /* SignInRequest.swift in Sources */,
 				0F4A211C28F5E41B009DCE98 /* SignUpViewModel.swift in Sources */,
 				0F4A211A28F5E3D0009DCE98 /* SignUpUIState.swift in Sources */,
 				0FACA03029953E4000B5D3BB /* SaveButton.swift in Sources */,
@@ -397,6 +418,7 @@
 				0F63F6D7299D18A500B633B8 /* SignUpRequest.swift in Sources */,
 				0FACA03A29957ACC00B5D3BB /* String+.swift in Sources */,
 				0F4A210128F5A286009DCE98 /* SplashViewRouter.swift in Sources */,
+				0F63F6DF299D350300B633B8 /* SignInResponse.swift in Sources */,
 				0F4A20FD28F5A132009DCE98 /* SignInView.swift in Sources */,
 				0FACA033299562BB00B5D3BB /* EditTextView.swift in Sources */,
 			);
@@ -530,7 +552,7 @@
 				DEVELOPMENT_TEAM = WX6Q94XHF5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = Habit/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -563,7 +585,7 @@
 				DEVELOPMENT_TEAM = WX6Q94XHF5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = Habit/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
