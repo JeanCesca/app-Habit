@@ -25,6 +25,8 @@
 		0F4A211A28F5E3D0009DCE98 /* SignUpUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A211928F5E3D0009DCE98 /* SignUpUIState.swift */; };
 		0F4A211C28F5E41B009DCE98 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A211B28F5E41B009DCE98 /* SignUpViewModel.swift */; };
 		0F4A211E28F5E486009DCE98 /* SignUpViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4A211D28F5E486009DCE98 /* SignUpViewRouter.swift */; };
+		0F63F6D5299D0FE900B633B8 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F6D4299D0FE900B633B8 /* WebService.swift */; };
+		0F63F6D7299D18A500B633B8 /* SignUpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F6D6299D18A500B633B8 /* SignUpRequest.swift */; };
 		0FACA03029953E4000B5D3BB /* SaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA02F29953E4000B5D3BB /* SaveButton.swift */; };
 		0FACA033299562BB00B5D3BB /* EditTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA032299562BB00B5D3BB /* EditTextView.swift */; };
 		0FACA036299576AA00B5D3BB /* CustomTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA035299576AA00B5D3BB /* CustomTextFieldStyle.swift */; };
@@ -52,6 +54,8 @@
 		0F4A211928F5E3D0009DCE98 /* SignUpUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpUIState.swift; sourceTree = "<group>"; };
 		0F4A211B28F5E41B009DCE98 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		0F4A211D28F5E486009DCE98 /* SignUpViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewRouter.swift; sourceTree = "<group>"; };
+		0F63F6D4299D0FE900B633B8 /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		0F63F6D6299D18A500B633B8 /* SignUpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequest.swift; sourceTree = "<group>"; };
 		0FACA02F29953E4000B5D3BB /* SaveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButton.swift; sourceTree = "<group>"; };
 		0FACA032299562BB00B5D3BB /* EditTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextView.swift; sourceTree = "<group>"; };
 		0FACA035299576AA00B5D3BB /* CustomTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldStyle.swift; sourceTree = "<group>"; };
@@ -226,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				0F4A211928F5E3D0009DCE98 /* SignUpUIState.swift */,
+				0F63F6D6299D18A500B633B8 /* SignUpRequest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -247,9 +252,18 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		0F63F6D3299D0FDC00B633B8 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				0F63F6D4299D0FE900B633B8 /* WebService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		0FACA0282995325E00B5D3BB /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				0F63F6D3299D0FDC00B633B8 /* Network */,
 				0FACA03829957AA200B5D3BB /* Extensions */,
 				0FACA0372995776400B5D3BB /* Model */,
 				0FACA0342995769900B5D3BB /* Style */,
@@ -362,6 +376,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F63F6D5299D0FE900B633B8 /* WebService.swift in Sources */,
 				0F1C9A8328F4D40300426F9A /* SplashUIState.swift in Sources */,
 				0F4A210E28F5C13E009DCE98 /* HomeViewModel.swift in Sources */,
 				0F1C9A6F28F4D2BC00426F9A /* HabitApp.swift in Sources */,
@@ -379,6 +394,7 @@
 				0F4A211828F5DF02009DCE98 /* Gender.swift in Sources */,
 				0F4A20F628F595CC009DCE98 /* SplashViewModel.swift in Sources */,
 				0F4A210428F5B85F009DCE98 /* SignInUIState.swift in Sources */,
+				0F63F6D7299D18A500B633B8 /* SignUpRequest.swift in Sources */,
 				0FACA03A29957ACC00B5D3BB /* String+.swift in Sources */,
 				0F4A210128F5A286009DCE98 /* SplashViewRouter.swift in Sources */,
 				0F4A20FD28F5A132009DCE98 /* SignInView.swift in Sources */,
