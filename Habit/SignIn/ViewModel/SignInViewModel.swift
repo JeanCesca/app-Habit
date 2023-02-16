@@ -20,7 +20,10 @@ class SignInViewModel: ObservableObject {
     
     @Published var uiState: SignInUIState = .none
     
-    init() {
+    private let interactor: SignInInteractor
+    
+    init(interactor: SignInInteractor) {
+        self.interactor = interactor
         addSubscribers()
     }
     
@@ -31,7 +34,7 @@ class SignInViewModel: ObservableObject {
     func login() {
         self.uiState = .loading
         
-        WebService.loginUser(request: SignInRequest(email: email, password: password)) { successResponse, errorResponse in
+        interactor.loginUser(loginRequest: SignInRequest(email: email, password: password)) { successResponse, errorResponse in
             
             if let errorResponse = errorResponse {
                 DispatchQueue.main.async {

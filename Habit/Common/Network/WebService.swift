@@ -78,7 +78,7 @@ enum WebService {
         }.resume()
     }
     
-    private static func requestCall_JSON<T: Encodable>(
+    public static func requestCall_JSON<T: Encodable>(
         path: Endpoint,
         body: T,
         completion: @escaping ((Result) -> Void)
@@ -94,7 +94,7 @@ enum WebService {
             completion: completion)
     }
     
-    private static func requestCall_FormatData(
+    public static func requestCall_FormatData(
         path: Endpoint,
         params: [URLQueryItem],
         completion: @escaping ((Result) -> Void)
@@ -134,25 +134,6 @@ enum WebService {
     
     static func loginUser(request: SignInRequest, completion: @escaping (SignInResponse?, SignInErrorResponse?) -> Void) {
                 
-        requestCall_FormatData(path: .loginUser, params: [
-            URLQueryItem(name: "username", value: request.email),
-            URLQueryItem(name: "password", value: request.password)
-        ]) { result in
-            switch result {
-            case .success(let data):
-//                print(String(data: data, encoding: .utf8)!)
-                let response = try? JSONDecoder().decode(SignInResponse.self, from: data)
-//                print("RESPONSE ===== \(response)")
-                completion(response, nil)
-            case .failure(let error, let data):
-                if let data = data {
-                    if error == .unAuthorized {
-//                        print(String(data: data, encoding: .utf8))
-                        let response = try? JSONDecoder().decode(SignInErrorResponse.self, from: data)
-                        completion(nil, response)
-                    }
-                }
-            }
-        }
+
     }
 }
