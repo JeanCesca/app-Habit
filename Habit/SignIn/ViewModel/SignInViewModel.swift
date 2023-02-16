@@ -12,10 +12,12 @@ class SignInViewModel: ObservableObject {
     
     @Published var email: String = ""
     @Published var password: String = ""
+    @Published var testeToken = ""
     
     //Combine
     private var cancellable: AnyCancellable?
     private var cancellableRequest: AnyCancellable?
+    private var cancellableTest: AnyCancellable?
 
     private let publisher = PassthroughSubject<Bool, Never>()
     
@@ -33,22 +35,38 @@ class SignInViewModel: ObservableObject {
         cancellableRequest?.cancel()
     }
     
-    func login() {
+    public func testeRequest() {
+        cancellableTest = interactor.fetchAuth()
+            .receive(on: DispatchQueue.main)
+            .sink { userAuth in
+                self.testeToken = userAuth?.idToken ?? "Token ainda não registrado"
+            }
+    }
+    
+    public func login() {
         self.uiState = .loading
         
         cancellableRequest = interactor.loginUser(loginRequest: SignInRequest(email: email, password: password))
             .receive(on: DispatchQueue.main)
-            .sink { completion in
+            .sink { [weak self] completion in
                 switch completion {
                 case .finished:
                     break
                 case .failure(let errorResponse):
-                    self.uiState = SignInUIState.error(errorResponse.message)
+                    self?.uiState = SignInUIState.error(errorResponse.message)
                     break
                 }
-            } receiveValue: { successResponse in
+            } receiveValue: { [weak self] successResponse in
                 print(successResponse)
-                self.uiState = .goToHomeScreen
+                
+                let auth = UserAuth(
+                    idToken: successResponse.accessToken,
+                    refreshToken: successResponse.refreshToken,
+                    expires: successResponse.expires,
+                    tokenType: successResponse.tokenType)
+                
+                self?.interactor.insertAuth(userAuth: auth)
+                self?.uiState = .goToHomeScreen
             }
     }
 

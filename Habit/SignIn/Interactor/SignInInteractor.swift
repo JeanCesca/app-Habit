@@ -10,16 +10,24 @@ import Combine
 
 class SignInInteractor {
     
-    private let remote: SignInRemoteDataSource = .shared
-    // private let local: LocalDataSource
+    private let remoteDataSource: SignInRemoteDataSource = .shared
+    private let localDataSource: LocalDataSource = .shared
 
 }
 
 extension SignInInteractor {
     
+    public func fetchAuth() -> Future<UserAuth?, Never> {
+        return localDataSource.getUserAuth()
+    }
+    
     //O interactor pede pro Remote o que fazer.
     public func loginUser(loginRequest request: SignInRequest) -> Future<SignInResponse, AppError> {
-        return remote.loginUser(request: request)
+        return remoteDataSource.loginUser(request: request)
+    }
+    
+    public func insertAuth(userAuth: UserAuth) {
+        localDataSource.insertUserAuth(userAuth: userAuth)
     }
     
 }

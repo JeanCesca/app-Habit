@@ -22,7 +22,11 @@ struct SignInView: View {
             } else {
                 NavigationView {
                     ScrollView(showsIndicators: false) {
+                                                
                         imageLogo
+                        
+//                        Text(vm.testeToken)
+
                         emailTextField
                         passwordTextField
                         enterButton
@@ -39,6 +43,9 @@ struct SignInView: View {
                     .navigationBarHidden(navigationHidden)
                 }
             }
+        }
+        .onAppear {
+            self.vm.testeRequest()
         }
     }
 }
