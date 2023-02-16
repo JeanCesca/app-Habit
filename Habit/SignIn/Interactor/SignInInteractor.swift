@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import Combine
 
 class SignInInteractor {
     
-    private let remote: RemoteDataSource = .shared
+    private let remote: SignInRemoteDataSource = .shared
     // private let local: LocalDataSource
 
 }
@@ -17,8 +18,8 @@ class SignInInteractor {
 extension SignInInteractor {
     
     //O interactor pede pro Remote o que fazer.
-    public func loginUser(loginRequest request: SignInRequest, completion: @escaping (SignInResponse?, SignInErrorResponse?) -> Void) {
-        remote.loginUser(request: request, completion: completion)
+    public func loginUser(loginRequest request: SignInRequest) -> Future<SignInResponse, AppError> {
+        return remote.loginUser(request: request)
     }
     
 }

@@ -113,25 +113,6 @@ enum WebService {
             completion: completion)
     }
     
-    static func registerUser(request: SignUpRequest, completion: @escaping (Bool?, ErrorResponse?) -> Void) {
-        requestCall_JSON(path: .postUser, body: request) { result in
-            //Result é o resultado da Data (JSON) ou do Erro do servidor, que preciso Decodar
-            switch result {
-            case .success(let data):
-//                print(String(data: data, encoding: .utf8))
-                completion(true, nil)
-            case .failure(_, let data):
-                if let data = data {
-//                    print(String(data: data, encoding: .utf8))
-                    let response = try? JSONDecoder().decode(ErrorResponse.self, from: data)
-                    //delegar essa response para a ViewModel
-                    completion(nil, response)
-                }
-            }
-        }
-        
-    }
-    
     static func loginUser(request: SignInRequest, completion: @escaping (SignInResponse?, SignInErrorResponse?) -> Void) {
                 
 

@@ -19,14 +19,71 @@ class SignUpViewModel: ObservableObject {
     @Published var birthday: String = ""
     @Published var gender: Gender = Gender.male
     
+    //Interactor
+    private let interactor: SignUpInteractor
+    
     //Combine
     var publisher: PassthroughSubject<Bool, Never>!
+    private var cancellableSignUp: AnyCancellable?
+    private var cancellableSignIn: AnyCancellable?
     
+    //State
     @Published var uiState: SignUpUIState = .none
+    
+    init(interactor: SignUpInteractor) {
+        self.interactor = interactor
+    }
+    
+    deinit {
+        cancellableSignIn?.cancel()
+        cancellableSignUp?.cancel()
+    }
     
     func signUp() {
         self.uiState = .loading
+
+        let signUpRequest = SignUpRequest(
+            fullName: fullName,
+            email: email,
+            password: password,
+            document: document,
+            phone: phone,
+            birthday: formattedData(),
+            gender: gender.index)
         
+        cancellableSignUp = interactor.registerUser(signUpRequest: signUpRequest)
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                //
+                switch completion {
+                case .failure(let erroResponse):
+                    self.uiState = .error(erroResponse.message)
+                case .finished:
+                    break
+                }
+            } receiveValue: { successSignUp in
+                //se tiver criado usuário
+                if successSignUp {
+                    self.cancellableSignIn = self.interactor.loginUser(signInRequest: SignInRequest(email: self.email, password: self.password))
+                        .receive(on: DispatchQueue.main)
+                        .sink { completion in
+                            switch completion {
+                            case .finished:
+                                break
+                            case .failure(let appError):
+                                self.uiState = .error(appError.message)
+                            }
+                        } receiveValue: { successSignIn in
+                            self.publisher.send(successSignUp)
+                            self.uiState = .success
+                        }
+                }
+            }
+    }
+}
+
+extension SignUpViewModel {
+    func formattedData() -> String {
         //Transformar String dd/MM/yyyy -> Date
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
@@ -37,49 +94,14 @@ class SignUpViewModel: ObservableObject {
         //Validar a Data
         guard let dateFormatted = dateFormatted else {
             self.uiState = .error("Data inválida \(birthday)")
-            return
+            return ""
         }
         
         //Date -> String
         formatter.dateFormat = "yyyy-MM-dd"
         let birthday = formatter.string(from: dateFormatted)
         
-        WebService.registerUser(request: SignUpRequest(
-            fullName: fullName,
-            email: email,
-            password: password,
-            document: document,
-            phone: phone,
-            birthday: birthday,
-            gender: gender.index)) { successResponse, errorResponse in
-                
-                if let errorResponse = errorResponse {
-                    DispatchQueue.main.async {
-                        self.uiState = .error(errorResponse.detail)
-                    }
-                }
-                
-                if let success = successResponse {
-                    
-//                    WebService.loginUser(request: SignInRequest(email: self.email, password: self.password)) { successResponse, errorResponse in
-//
-//                        if let errorSignIn = errorResponse {
-//                            DispatchQueue.main.async {
-//                                self.uiState = .error(errorSignIn.detail.message)
-//                            }
-//                        }
-//
-//                        if let successSignIn = successResponse {
-//                            DispatchQueue.main.async {
-//                                print(successSignIn)
-//                                self.publisher.send(success)
-//                                self.uiState = .success
-//                            }
-//                        }
-//
-//                    }
-                }
-            }
+        return birthday
     }
 }
 

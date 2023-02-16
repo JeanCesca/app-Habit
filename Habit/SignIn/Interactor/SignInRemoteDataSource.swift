@@ -8,9 +8,9 @@
 import Foundation
 import Combine
 
-class RemoteDataSource { //SINGLETON
+class SignInRemoteDataSource { //SINGLETON
     
-    static let shared: RemoteDataSource = RemoteDataSource()
+    static let shared: SignInRemoteDataSource = SignInRemoteDataSource()
     
     private init() {}
     
@@ -25,28 +25,22 @@ class RemoteDataSource { //SINGLETON
             
             WebService.requestCall_FormatData(path: .loginUser, params: params) { result in
                 switch result {
-                    
                 case .success(let data):
                     let response = try? JSONDecoder().decode(SignInResponse.self, from: data)
-//                    completion(response, nil)
                     guard let response = response else {
                         print("Log: Error de parser \(String(describing: String(data: data, encoding: .utf8)))")
                         return
                     }
                     promise(.success(response))
-
                 case .failure(let error, let data):
                     if let data = data {
                         if error == .unAuthorized {
                             let response = try? JSONDecoder().decode(SignInErrorResponse.self, from: data)
                             promise(.failure(.response(message: response?.detail.message ?? "Erro desconhecido no servidor")))
-//                            completion(nil, response)
                         }
                     }
                 }
             }
-            
         }
     }
-    
 }

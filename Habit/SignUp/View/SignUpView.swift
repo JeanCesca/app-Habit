@@ -152,9 +152,9 @@ extension SignUpView {
 struct SignUpView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SignUpView(vm: SignUpViewModel())
+            SignUpView(vm: SignUpViewModel(interactor: SignUpInteractor()))
                 .preferredColorScheme(.light)
-            SignUpView(vm: SignUpViewModel())
+            SignUpView(vm: SignUpViewModel(interactor: SignUpInteractor()))
                 .preferredColorScheme(.dark)
         }
     }
