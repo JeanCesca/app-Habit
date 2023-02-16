@@ -39,6 +39,7 @@
 		0F63F6EE299E5A5A00B633B8 /* SignUpRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F6ED299E5A5A00B633B8 /* SignUpRemoteDataSource.swift */; };
 		0F63F6F0299E69AF00B633B8 /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F6EF299E69AF00B633B8 /* UserAuth.swift */; };
 		0F63F6F2299E6A6A00B633B8 /* LocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F6F1299E6A6A00B633B8 /* LocalDataSource.swift */; };
+		0F63F6F4299EA1FB00B633B8 /* SplashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F6F3299EA1FB00B633B8 /* SplashInteractor.swift */; };
 		0FACA03029953E4000B5D3BB /* SaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA02F29953E4000B5D3BB /* SaveButton.swift */; };
 		0FACA033299562BB00B5D3BB /* EditTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA032299562BB00B5D3BB /* EditTextView.swift */; };
 		0FACA036299576AA00B5D3BB /* CustomTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA035299576AA00B5D3BB /* CustomTextFieldStyle.swift */; };
@@ -81,6 +82,7 @@
 		0F63F6ED299E5A5A00B633B8 /* SignUpRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRemoteDataSource.swift; sourceTree = "<group>"; };
 		0F63F6EF299E69AF00B633B8 /* UserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuth.swift; sourceTree = "<group>"; };
 		0F63F6F1299E6A6A00B633B8 /* LocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataSource.swift; sourceTree = "<group>"; };
+		0F63F6F3299EA1FB00B633B8 /* SplashInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInteractor.swift; sourceTree = "<group>"; };
 		0FACA02F29953E4000B5D3BB /* SaveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButton.swift; sourceTree = "<group>"; };
 		0FACA032299562BB00B5D3BB /* EditTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextView.swift; sourceTree = "<group>"; };
 		0FACA035299576AA00B5D3BB /* CustomTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldStyle.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 		0F1C9A7C28F4D2F200426F9A /* Splash */ = {
 			isa = PBXGroup;
 			children = (
+				0F63F6F5299EA20000B633B8 /* Interactor */,
 				0F1C9A7F28F4D32000426F9A /* ViewModel */,
 				0F1C9A7E28F4D31200426F9A /* Model */,
 				0F1C9A7D28F4D30800426F9A /* View */,
@@ -311,6 +314,14 @@
 			path = Interactor;
 			sourceTree = "<group>";
 		};
+		0F63F6F5299EA20000B633B8 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				0F63F6F3299EA1FB00B633B8 /* SplashInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
 		0FACA0282995325E00B5D3BB /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -448,6 +459,7 @@
 				0F63F6F0299E69AF00B633B8 /* UserAuth.swift in Sources */,
 				0F63F6E9299D758600B633B8 /* AppError.swift in Sources */,
 				0F4A210C28F5C131009DCE98 /* HomeView.swift in Sources */,
+				0F63F6F4299EA1FB00B633B8 /* SplashInteractor.swift in Sources */,
 				0F4A210628F5C0D0009DCE98 /* SignInViewRouter.swift in Sources */,
 				0F63F6DD299D33C100B633B8 /* SignInRequest.swift in Sources */,
 				0F63F6E7299D663100B633B8 /* SignInRemoteDataSource.swift in Sources */,

@@ -48,5 +48,4 @@ extension LocalDataSource {
             promise(.success(userAuth))
         }
     }
-    
 }

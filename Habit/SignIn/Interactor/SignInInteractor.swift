@@ -17,10 +17,6 @@ class SignInInteractor {
 
 extension SignInInteractor {
     
-    public func fetchAuth() -> Future<UserAuth?, Never> {
-        return localDataSource.getUserAuth()
-    }
-    
     //O interactor pede pro Remote o que fazer.
     public func loginUser(loginRequest request: SignInRequest) -> Future<SignInResponse, AppError> {
         return remoteDataSource.loginUser(request: request)

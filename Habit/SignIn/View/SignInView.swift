@@ -24,9 +24,6 @@ struct SignInView: View {
                     ScrollView(showsIndicators: false) {
                                                 
                         imageLogo
-                        
-//                        Text(vm.testeToken)
-
                         emailTextField
                         passwordTextField
                         enterButton
@@ -45,7 +42,7 @@ struct SignInView: View {
             }
         }
         .onAppear {
-            self.vm.testeRequest()
+            //
         }
     }
 }

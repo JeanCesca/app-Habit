@@ -80,7 +80,7 @@ struct LoadingView: View {
 
 struct SplashView_Previews: PreviewProvider {
     static var previews: some View {
-        SplashView(vm: SplashViewModel())
+        SplashView(vm: SplashViewModel(interactor: SplashInteractor()))
     }
 }
 
