@@ -40,6 +40,8 @@
 		0F63F6F0299E69AF00B633B8 /* UserAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F6EF299E69AF00B633B8 /* UserAuth.swift */; };
 		0F63F6F2299E6A6A00B633B8 /* LocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F6F1299E6A6A00B633B8 /* LocalDataSource.swift */; };
 		0F63F6F4299EA1FB00B633B8 /* SplashInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F6F3299EA1FB00B633B8 /* SplashInteractor.swift */; };
+		0F63F6F7299EB17700B633B8 /* RefreshRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F6F6299EB17700B633B8 /* RefreshRequest.swift */; };
+		0F63F6F9299EB57300B633B8 /* SplashRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F63F6F8299EB57300B633B8 /* SplashRemoteDataSource.swift */; };
 		0FACA03029953E4000B5D3BB /* SaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA02F29953E4000B5D3BB /* SaveButton.swift */; };
 		0FACA033299562BB00B5D3BB /* EditTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA032299562BB00B5D3BB /* EditTextView.swift */; };
 		0FACA036299576AA00B5D3BB /* CustomTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA035299576AA00B5D3BB /* CustomTextFieldStyle.swift */; };
@@ -83,6 +85,8 @@
 		0F63F6EF299E69AF00B633B8 /* UserAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAuth.swift; sourceTree = "<group>"; };
 		0F63F6F1299E6A6A00B633B8 /* LocalDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataSource.swift; sourceTree = "<group>"; };
 		0F63F6F3299EA1FB00B633B8 /* SplashInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashInteractor.swift; sourceTree = "<group>"; };
+		0F63F6F6299EB17700B633B8 /* RefreshRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshRequest.swift; sourceTree = "<group>"; };
+		0F63F6F8299EB57300B633B8 /* SplashRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashRemoteDataSource.swift; sourceTree = "<group>"; };
 		0FACA02F29953E4000B5D3BB /* SaveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButton.swift; sourceTree = "<group>"; };
 		0FACA032299562BB00B5D3BB /* EditTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextView.swift; sourceTree = "<group>"; };
 		0FACA035299576AA00B5D3BB /* CustomTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldStyle.swift; sourceTree = "<group>"; };
@@ -164,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				0F1C9A8228F4D40200426F9A /* SplashUIState.swift */,
+				0F63F6F6299EB17700B633B8 /* RefreshRequest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -318,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				0F63F6F3299EA1FB00B633B8 /* SplashInteractor.swift */,
+				0F63F6F8299EB57300B633B8 /* SplashRemoteDataSource.swift */,
 			);
 			path = Interactor;
 			sourceTree = "<group>";
@@ -454,6 +460,7 @@
 				0F63F6F2299E6A6A00B633B8 /* LocalDataSource.swift in Sources */,
 				0FACA03C29957F6800B5D3BB /* LoadingButtonView.swift in Sources */,
 				0F63F6E2299D52C400B633B8 /* SignInErrorResponse.swift in Sources */,
+				0F63F6F9299EB57300B633B8 /* SplashRemoteDataSource.swift in Sources */,
 				0F4A20FF28F5A16B009DCE98 /* SignInViewModel.swift in Sources */,
 				0F4A211428F5DA73009DCE98 /* SignUpView.swift in Sources */,
 				0F63F6F0299E69AF00B633B8 /* UserAuth.swift in Sources */,
@@ -470,6 +477,7 @@
 				0F1C9A8128F4D34700426F9A /* SplashView.swift in Sources */,
 				0F4A211828F5DF02009DCE98 /* Gender.swift in Sources */,
 				0F4A20F628F595CC009DCE98 /* SplashViewModel.swift in Sources */,
+				0F63F6F7299EB17700B633B8 /* RefreshRequest.swift in Sources */,
 				0F4A210428F5B85F009DCE98 /* SignInUIState.swift in Sources */,
 				0F63F6D7299D18A500B633B8 /* SignUpRequest.swift in Sources */,
 				0FACA03A29957ACC00B5D3BB /* String+.swift in Sources */,

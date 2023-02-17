@@ -1,29 +1,24 @@
 //
-//  RemoteDataSource.swift
+//  SplashRemoteDataSource.swift
 //  Habit
 //
-//  Created by Jean Ricardo Cesca on 15/02/23.
+//  Created by Jean Ricardo Cesca on 16/02/23.
 //
 
 import Foundation
 import Combine
 
-class SignInRemoteDataSource { //SINGLETON
+class SplashRemoteDataSource {
     
-    static let shared: SignInRemoteDataSource = SignInRemoteDataSource()
+    static let shared: SplashRemoteDataSource = SplashRemoteDataSource()
     
     private init() {}
     
-    func loginUser(request: SignInRequest) -> Future<SignInResponse, AppError> {
+    func refreshToken(refreshToken request: RefreshRequest) -> Future<SignInResponse, AppError> {
         
         Future<SignInResponse, AppError> { promise in
             
-            let params: [URLQueryItem] = [
-                URLQueryItem(name: "username", value: request.email),
-                URLQueryItem(name: "password", value: request.password)
-            ]
-            
-            WebService.requestCall_FormData(path: .loginUser, params: params) { result in
+            WebService.requestCall_JSON(path: .refreshToken, method: .put, body: request) { result in
                 switch result {
                 case .success(let data):
                     let response = try? JSONDecoder().decode(SignInResponse.self, from: data)

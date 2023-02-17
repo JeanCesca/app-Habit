@@ -15,6 +15,7 @@ class SplashViewModel: ObservableObject {
     
     //Combine
     private var cancellableAuth: AnyCancellable?
+    private var cancellableRefresh: AnyCancellable?
     
     //Interactor
     private let interactor: SplashInteractor
@@ -25,6 +26,7 @@ class SplashViewModel: ObservableObject {
     
     deinit {
         cancellableAuth?.cancel()
+        cancellableRefresh?.cancel()
     }
 
     public func onAppear() {
@@ -39,14 +41,37 @@ class SplashViewModel: ObservableObject {
                     self?.uiState = .goToSignInScreen
                 }
                 //se user userAuth != nil && expirou -> Token Refresh
-                else if userAuth != nil && (Date().timeIntervalSince1970 > Date().timeIntervalSince1970 + Double(userAuth!.expires)) {
-                //self?.uiState = .goToHomeScreen
+                else if userAuth != nil && (Date().timeIntervalSince1970 > Double(userAuth!.expires)) {
+                    self?.subscribeRefresh(userAuth: userAuth)
                 }
                 //senao -> Tela home
                 else {
                     self?.uiState = .goToHomeScreen
                 }
         }
+    }
+    
+    public func subscribeRefresh(userAuth: UserAuth?) {
+        cancellableRefresh = interactor.refreshToken(refreshRequest: RefreshRequest(token: userAuth!.refreshToken))
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { [weak self] completion in
+                switch completion {
+                case .failure(_):
+                    self?.uiState = .goToSignInScreen
+                case .finished:
+                    break
+                }
+            }, receiveValue: { [weak self] successResponse in
+                
+                let auth = UserAuth(
+                    idToken: successResponse.accessToken,
+                    refreshToken: successResponse.refreshToken,
+                    expires: Date().timeIntervalSince1970 + Double(successResponse.expires),
+                    tokenType: successResponse.tokenType)
+                
+                self?.interactor.insertAuth(userAuth: auth)
+                self?.uiState = .goToHomeScreen
+            })
     }
 }
 

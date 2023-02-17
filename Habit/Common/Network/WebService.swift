@@ -14,6 +14,7 @@ enum WebService {
         case base = "https://habitplus-api.tiagoaguiar.co"
         case postUser = "/users"
         case loginUser = "/auth/login"
+        case refreshToken = "/auth/refresh-token"
     }
     
     enum NetworkError {
@@ -33,6 +34,13 @@ enum WebService {
         case formUrl = "application/x-www-form-urlencoded"
     }
     
+    enum Method: String {
+        case get = "GET"
+        case post = "POST"
+        case put = "PUT"
+        case delete = "DELETE"
+    }
+    
     private static func completeUrl(path: Endpoint) -> URLRequest? {
         guard let url = URL(string: "\(Endpoint.base.rawValue)\(path.rawValue)") else { return nil }
         return URLRequest(url: url)
@@ -40,46 +48,57 @@ enum WebService {
     
     private static func requestCall(
         path: Endpoint,
+        method: Method,
         contentType: ContentType,
         data: Data?,
         completion: @escaping (Result) -> Void
     ) {
         // 1. criar uma URL que irá esperar os valores do JSON
         guard var urlRequest = completeUrl(path: path) else { return }
-        //definir as propriedades para a CHAMADA da URL
-        //REQUEST
-        urlRequest.httpMethod = "POST"
-        urlRequest.setValue("application/json", forHTTPHeaderField: "accept")
-        urlRequest.setValue(contentType.rawValue, forHTTPHeaderField: "Content-Type")
-        urlRequest.httpBody = data //formato FormData: chave=valor&chave=valor
         
-        // 2. Conectar com o servidor para ter uma resposta de volta (RESPONSE)
-        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-            guard let data = data, error == nil else {
-                completion(.failure(.internalServerError, nil))
-                return
-            }
-            
-//            print(String(data: data, encoding: .utf8))
-
-            if let response = response as? HTTPURLResponse {
-//                print(response)
-                switch response.statusCode {
-                case 200:
-                    completion(.success(data))
-                case 400:
-                    completion(.failure(.badRequest, data))
-                case 401:
-                    completion(.failure(.unAuthorized, data))
-                default:
-                    break
+        //Adicionar o authorization caso exista
+        _ = LocalDataSource.shared.getUserAuth()
+            .sink { userAuth in
+                if let userAuth = userAuth {
+                    urlRequest.setValue("\(userAuth.tokenType) \(userAuth.idToken)", forHTTPHeaderField: "Authorization")
                 }
+                
+                //definir as propriedades para a CHAMADA da URL
+                //REQUEST
+                urlRequest.httpMethod = method.rawValue
+                urlRequest.setValue("application/json", forHTTPHeaderField: "accept")
+                urlRequest.setValue(contentType.rawValue, forHTTPHeaderField: "Content-Type")
+                urlRequest.httpBody = data //formato FormData: chave=valor&chave=valor
+                
+                // 2. Conectar com o servidor para ter uma resposta de volta (RESPONSE)
+                URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+                    guard let data = data, error == nil else {
+                        completion(.failure(.internalServerError, nil))
+                        return
+                    }
+                    
+        //            print(String(data: data, encoding: .utf8))
+
+                    if let response = response as? HTTPURLResponse {
+        //                print(response)
+                        switch response.statusCode {
+                        case 200:
+                            completion(.success(data))
+                        case 400:
+                            completion(.failure(.badRequest, data))
+                        case 401:
+                            completion(.failure(.unAuthorized, data))
+                        default:
+                            break
+                        }
+                    }
+                }.resume()
             }
-        }.resume()
     }
     
     public static func requestCall_JSON<T: Encodable>(
         path: Endpoint,
+        method: Method = .get,
         body: T,
         completion: @escaping ((Result) -> Void)
     ) {
@@ -89,13 +108,15 @@ enum WebService {
         
         requestCall(
             path: path,
+            method: method,
             contentType: .json,
             data: jsonData,
             completion: completion)
     }
     
-    public static func requestCall_FormatData(
+    public static func requestCall_FormData(
         path: Endpoint,
+        method: Method = .post,
         params: [URLQueryItem],
         completion: @escaping ((Result) -> Void)
     ) {
@@ -108,6 +129,7 @@ enum WebService {
                 
         requestCall(
             path: path,
+            method: method,
             contentType: .formUrl,
             data: components?.query?.data(using: .utf8),
             completion: completion)

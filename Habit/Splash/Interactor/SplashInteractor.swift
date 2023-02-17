@@ -10,7 +10,7 @@ import Combine
 
 class SplashInteractor {
     
-//    private let remoteDataSource: SignInRemoteDataSource = .shared
+    private let remoteDataSource: SplashRemoteDataSource = .shared
     private let localDataSource: LocalDataSource = .shared
 
 }
@@ -19,5 +19,13 @@ extension SplashInteractor {
     
     public func fetchAuth() -> Future<UserAuth?, Never> {
         return localDataSource.getUserAuth()
+    }
+    
+    public func insertAuth(userAuth: UserAuth) {
+        localDataSource.insertUserAuth(userAuth: userAuth)
+    }
+    
+    public func refreshToken(refreshRequest request: RefreshRequest) -> Future<SignInResponse, AppError> {
+        return remoteDataSource.refreshToken(refreshToken: request)
     }
 }

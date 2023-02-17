@@ -53,11 +53,11 @@ class SignUpViewModel: ObservableObject {
         
         cancellableSignUp = interactor.registerUser(signUpRequest: signUpRequest)
             .receive(on: DispatchQueue.main)
-            .sink { completion in
+            .sink { [weak self] completion in
                 //
                 switch completion {
                 case .failure(let erroResponse):
-                    self.uiState = .error(erroResponse.message)
+                    self?.uiState = .error(erroResponse.message)
                 case .finished:
                     break
                 }
@@ -66,16 +66,25 @@ class SignUpViewModel: ObservableObject {
                 if successSignUp {
                     self.cancellableSignIn = self.interactor.loginUser(signInRequest: SignInRequest(email: self.email, password: self.password))
                         .receive(on: DispatchQueue.main)
-                        .sink { completion in
+                        .sink { [weak self] completion in
                             switch completion {
                             case .finished:
                                 break
                             case .failure(let appError):
-                                self.uiState = .error(appError.message)
+                                self?.uiState = .error(appError.message)
                             }
-                        } receiveValue: { successSignIn in
-                            self.publisher.send(successSignUp)
-                            self.uiState = .success
+                        } receiveValue: { [weak self] successSignIn in
+                            
+                            let auth = UserAuth(
+                                idToken: successSignIn.accessToken,
+                                refreshToken: successSignIn.refreshToken,
+                                expires: Date().timeIntervalSince1970 + Double(successSignIn.expires),
+                                tokenType: successSignIn.tokenType)
+                            
+                            self?.interactor.insertAuth(userAuth: auth)
+                            
+                            self?.publisher.send(successSignUp)
+                            self?.uiState = .success
                         }
                 }
             }

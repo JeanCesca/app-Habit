@@ -12,16 +12,21 @@ class SignUpInteractor {
     
     private let remoteSignUp: SignUpRemoteDataSource = .shared
     private let remoteSignIn: SignInRemoteDataSource = .shared
+    private let localDataSource: LocalDataSource = .shared
     
 }
 
 extension SignUpInteractor {
     
-    func registerUser(signUpRequest request: SignUpRequest) -> Future<Bool, AppError> {
+    public func registerUser(signUpRequest request: SignUpRequest) -> Future<Bool, AppError> {
         return remoteSignUp.registerUser(request: request)
     }
     
-    func loginUser(signInRequest request: SignInRequest) -> Future<SignInResponse, AppError> {
+    public func loginUser(signInRequest request: SignInRequest) -> Future<SignInResponse, AppError> {
         return remoteSignIn.loginUser(request: request)
+    }
+    
+    public func insertAuth(userAuth: UserAuth) {
+        localDataSource.insertUserAuth(userAuth: userAuth)
     }
 }

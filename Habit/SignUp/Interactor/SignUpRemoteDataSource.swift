@@ -17,7 +17,7 @@ class SignUpRemoteDataSource { //SINGLETON
     
     func registerUser(request: SignUpRequest) -> Future<Bool, AppError> {
         Future<Bool, AppError> { promise in
-            WebService.requestCall_JSON(path: .postUser, body: request) { result in
+            WebService.requestCall_JSON(path: .postUser, method: .post, body: request) { result in
                 switch result {
                 case .success(_):
                     promise(.success(true))
