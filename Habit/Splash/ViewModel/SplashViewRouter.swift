@@ -13,4 +13,8 @@ enum SplashViewRouter {
     static func makeSignInView() -> some View {
         return SignInView(vm: SignInViewModel(interactor: SignInInteractor()))
     }
+    
+    static func makeHomeView() -> some View {
+        return HomeView(vm: HomeViewModel())
+    }
 }

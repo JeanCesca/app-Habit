@@ -76,8 +76,12 @@ class SplashViewModel: ObservableObject {
 }
 
 extension SplashViewModel {
+    
     public func signInView() -> some View {
         return SplashViewRouter.makeSignInView()
-        
+    }
+    
+    public func homeView() -> some View {
+        return SplashViewRouter.makeHomeView()
     }
 }

@@ -13,3 +13,10 @@ class HomeViewModel: ObservableObject {
     
     
 }
+
+extension HomeViewModel {
+    
+    public func habitView() -> some View {
+        return HomeViewRouter.makeHabitView()
+    }
+}

@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import Combine
 
-class SignUpRemoteDataSource { //SINGLETON
+class SignUpRemoteDataSource {
     
     static let shared: SignUpRemoteDataSource = SignUpRemoteDataSource()
     
