@@ -13,8 +13,8 @@ class HabitViewModel: ObservableObject {
     
     @Published var uiState: HabitUIState = .loading
     
-    @Published var title: String = ""
     @Published var description: String = ""
+    @Published var opened: Bool = false
     
     private let interactor: HabitInteractor
     
@@ -40,32 +40,37 @@ class HabitViewModel: ObservableObject {
     }
     
     func onAppear() {
+        self.opened = true
         self.uiState = .loading
         
         cancellableRequest = interactor.fetchHabits()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
-                
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    self.uiState = .error(error.message)
+                }
             }, receiveValue: { response in
                 if response.isEmpty {
                     self.uiState = .emptyList
-                    self.title = ""
                     self.description = "Você ainda não possui hábitos!"
                 } else {
                     self.uiState = .fullList(
-                        response.map {
+
+                        response.map { //veio em HabitResponse, preciso converter p/ HabitCardViewModel
+                            var state: Color = .green
+                            self.description = "Seus hábitos estão em dia"
                             
-                            let lastDate = $0.lastDate?.stringToDate(
+                            let lastDate = $0.lastDate?.dateToString(
                                 source: "yyyy-MM-dd'T'HH:mm:ss",
                                 destination: "dd/MM/yyyy HH:mm") ?? ""
                             
-                            var state = Color.green
-                            self.title = "Muito bom :)"
-                            self.description = ""
+                            let dateToCompare = $0.lastDate?.stringToDate(source: "yyyy-MM-dd'T'HH:mm:ss") ?? Date()
                             
-                            if lastDate < Date().dateToString(destination: "dd/MM/yyyy") {
+                            if dateToCompare < Date() {
                                 state = .red
-                                self.title = "Atenção"
                                 self.description = "Você está atrasado nos seus hábitos!"
                             }
                             
@@ -78,7 +83,7 @@ class HabitViewModel: ObservableObject {
                                 value: "\($0.value ?? 0)",
                                 state: state)
                         }
-                    ) //veio em HabitResponse, preciso converter p/ HabitCardViewModel
+                    )
                 }
         
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {

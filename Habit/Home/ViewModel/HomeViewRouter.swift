@@ -10,7 +10,7 @@ import SwiftUI
 
 enum HomeViewRouter {
     
-    static func makeHabitView() -> some View {
-        return HabitView(vm: HabitViewModel(interactor: HabitInteractor()))
+    static func makeHabitView(habitViewModel: HabitViewModel) -> some View {
+        return HabitView(vm: habitViewModel)
     }
 }

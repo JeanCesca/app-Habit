@@ -45,7 +45,9 @@ struct HabitView: View {
             }
         }
         .onAppear {
-            vm.onAppear()
+            if !vm.opened {
+                vm.onAppear()
+            }
         }
     }
 }
@@ -109,10 +111,10 @@ struct HabitView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NavigationView {
-                HomeViewRouter.makeHabitView()
+                HomeViewRouter.makeHabitView(habitViewModel: HabitViewModel(interactor: HabitInteractor()))
             }
             NavigationView {
-                HomeViewRouter.makeHabitView()
+                HomeViewRouter.makeHabitView(habitViewModel: HabitViewModel(interactor: HabitInteractor()))
                     .preferredColorScheme(.dark)
             }
         }

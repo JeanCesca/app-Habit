@@ -14,7 +14,7 @@ extension String {
         return NSPredicate(format: "SELF MATCHES %@", regEx).evaluate(with: self)
     }
     
-    func stringToDate(source: String, destination: String) -> String? {
+    func dateToString(source: String, destination: String) -> String? {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "en_US_POSIX")
         formatter.dateFormat = source
@@ -29,5 +29,13 @@ extension String {
         //Date -> String
         formatter.dateFormat = destination
         return formatter.string(from: dateFormatted)
+    }
+    
+    func stringToDate(source: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = source
+        
+        return formatter.date(from: self)
     }
 }

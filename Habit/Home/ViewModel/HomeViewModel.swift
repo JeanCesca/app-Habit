@@ -10,13 +10,13 @@ import SwiftUI
 
 class HomeViewModel: ObservableObject {
     
-    
+    let viewModel = HabitViewModel(interactor: HabitInteractor())
     
 }
 
 extension HomeViewModel {
     
     public func habitView() -> some View {
-        return HomeViewRouter.makeHabitView()
+        return HomeViewRouter.makeHabitView(habitViewModel: viewModel)
     }
 }
