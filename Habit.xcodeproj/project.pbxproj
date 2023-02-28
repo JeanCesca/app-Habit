@@ -53,6 +53,9 @@
 		0F9E7A9929AE348D000162DA /* HabitRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E7A9829AE348D000162DA /* HabitRemoteDataSource.swift */; };
 		0F9E7A9B29AE3715000162DA /* HabitInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E7A9A29AE3715000162DA /* HabitInteractor.swift */; };
 		0F9E7A9D29AE3F1A000162DA /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E7A9C29AE3F1A000162DA /* Date+.swift */; };
+		0F9E7AA329AE5239000162DA /* HabitDetailUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E7AA229AE5239000162DA /* HabitDetailUIState.swift */; };
+		0F9E7AA529AE5284000162DA /* HabitDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E7AA429AE5284000162DA /* HabitDetailViewModel.swift */; };
+		0F9E7AA829AE530F000162DA /* HabitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E7AA729AE530F000162DA /* HabitDetailView.swift */; };
 		0FACA03029953E4000B5D3BB /* SaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA02F29953E4000B5D3BB /* SaveButton.swift */; };
 		0FACA033299562BB00B5D3BB /* EditTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA032299562BB00B5D3BB /* EditTextView.swift */; };
 		0FACA036299576AA00B5D3BB /* CustomTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA035299576AA00B5D3BB /* CustomTextFieldStyle.swift */; };
@@ -109,6 +112,9 @@
 		0F9E7A9829AE348D000162DA /* HabitRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitRemoteDataSource.swift; sourceTree = "<group>"; };
 		0F9E7A9A29AE3715000162DA /* HabitInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitInteractor.swift; sourceTree = "<group>"; };
 		0F9E7A9C29AE3F1A000162DA /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		0F9E7AA229AE5239000162DA /* HabitDetailUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailUIState.swift; sourceTree = "<group>"; };
+		0F9E7AA429AE5284000162DA /* HabitDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailViewModel.swift; sourceTree = "<group>"; };
+		0F9E7AA729AE530F000162DA /* HabitDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailView.swift; sourceTree = "<group>"; };
 		0FACA02F29953E4000B5D3BB /* SaveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButton.swift; sourceTree = "<group>"; };
 		0FACA032299562BB00B5D3BB /* EditTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextView.swift; sourceTree = "<group>"; };
 		0FACA035299576AA00B5D3BB /* CustomTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldStyle.swift; sourceTree = "<group>"; };
@@ -153,6 +159,7 @@
 				0F4A210F28F5DA52009DCE98 /* SignUp */,
 				0F4A210728F5C118009DCE98 /* Home */,
 				0F63F6FC299FAC9F00B633B8 /* Habit */,
+				0F9E7A9E29AE5210000162DA /* HabitDetail */,
 				0F1C9A6E28F4D2BC00426F9A /* HabitApp.swift */,
 				0F1C9A7228F4D2BD00426F9A /* Assets.xcassets */,
 				0F1C9A7428F4D2BD00426F9A /* Preview Content */,
@@ -406,6 +413,40 @@
 			path = Interactor;
 			sourceTree = "<group>";
 		};
+		0F9E7A9E29AE5210000162DA /* HabitDetail */ = {
+			isa = PBXGroup;
+			children = (
+				0F9E7AA129AE5222000162DA /* ViewModel */,
+				0F9E7AA029AE521E000162DA /* View */,
+				0F9E7A9F29AE521B000162DA /* Model */,
+			);
+			path = HabitDetail;
+			sourceTree = "<group>";
+		};
+		0F9E7A9F29AE521B000162DA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0F9E7AA229AE5239000162DA /* HabitDetailUIState.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0F9E7AA029AE521E000162DA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F9E7AA729AE530F000162DA /* HabitDetailView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0F9E7AA129AE5222000162DA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0F9E7AA429AE5284000162DA /* HabitDetailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		0FACA0282995325E00B5D3BB /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -551,6 +592,7 @@
 				0F9E7A9B29AE3715000162DA /* HabitInteractor.swift in Sources */,
 				0F4A210C28F5C131009DCE98 /* HomeView.swift in Sources */,
 				0F63F70D299FEC2500B633B8 /* HabitCardView.swift in Sources */,
+				0F9E7AA329AE5239000162DA /* HabitDetailUIState.swift in Sources */,
 				0F63F6F4299EA1FB00B633B8 /* SplashInteractor.swift in Sources */,
 				0F4A210628F5C0D0009DCE98 /* SignInViewRouter.swift in Sources */,
 				0F63F6DD299D33C100B633B8 /* SignInRequest.swift in Sources */,
@@ -573,6 +615,8 @@
 				0F63F709299FE96F00B633B8 /* ButtonStyle.swift in Sources */,
 				0FACA03A29957ACC00B5D3BB /* String+.swift in Sources */,
 				0F4A210128F5A286009DCE98 /* SplashViewRouter.swift in Sources */,
+				0F9E7AA829AE530F000162DA /* HabitDetailView.swift in Sources */,
+				0F9E7AA529AE5284000162DA /* HabitDetailViewModel.swift in Sources */,
 				0F63F6DF299D350300B633B8 /* SignInResponse.swift in Sources */,
 				0F9E7A9629AE3299000162DA /* HabitResponse.swift in Sources */,
 				0F4A20FD28F5A132009DCE98 /* SignInView.swift in Sources */,
