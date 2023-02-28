@@ -23,29 +23,29 @@ struct HabitView: View {
                             addButton
                             
                             if case HabitUIState.emptyList = vm.uiState {
-                                
                                 Spacer(minLength: 60)
+                                alertHeader
                                 
-                                VStack {
-                                    Image(systemName: "exclamationmark.octagon")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 24, height: 24, alignment: .center)
-                                    
-                                    Text("Nenhum hábito encontrado :(")
+                            } else if case HabitUIState.fullList(let listRow) = vm.uiState {
+                                LazyVStack(spacing: 12) {
+                                    ForEach(listRow, content: HabitCardView.init(vm:))
                                 }
+                                .padding(.horizontal, 16)
                                 
-                                
-                            } else if case HabitUIState.emptyList = vm.uiState {
-                                
-                            } else if case HabitUIState.error = vm.uiState {
-                                
+                            } else if case HabitUIState.error(let message) = vm.uiState {
+                                Text("")
+                                    .alert(isPresented: .constant(true)) {
+                                        vm.presentAlert(message: message)
+                                    }
                             }
                         }
                     }
                     .navigationTitle("Meus hábitos")
                 }
             }
+        }
+        .onAppear {
+            vm.onAppear()
         }
     }
 }
@@ -62,15 +62,11 @@ extension HabitView {
             Image(systemName: "exclamationmark.triangle")
                 .resizable()
                 .scaledToFit()
-                .frame(width: 50, height: 50, alignment: .center)
+                .frame(width: 40, height: 40, alignment: .center)
                 .foregroundColor(Color("buttonColor"))
-            Text(vm.title)
-                .font(.title2)
-                .foregroundColor(Color("buttonColor"))
-                .monospaced()
             Text(vm.description)
                 .font(.callout)
-                .foregroundColor(Color("textColor"))
+                .foregroundColor(Color("buttonColor"))
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 32)
@@ -90,10 +86,22 @@ extension HabitView {
                 .frame(maxWidth: .infinity)
         } label: {
             Label("Criar hábito", systemImage: "plus.app")
-                .monospaced()
                 .modifier(ButtonStyle())
         }
         .padding(16)
+    }
+}
+
+extension HabitView {
+    var alertHeader: some View {
+        VStack {
+            Image(systemName: "exclamationmark.octagon")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 14, height: 14, alignment: .center)
+            
+            Text("Nenhum hábito encontrado :(")
+        }
     }
 }
 

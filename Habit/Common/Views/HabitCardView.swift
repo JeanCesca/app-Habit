@@ -11,14 +11,17 @@ struct HabitCardView: View {
     
     let vm: HabitCardViewModel
     
+    @State private var action = false
+    
     var body: some View {
         ZStack(alignment: .trailing) {
-            NavigationLink("") {
+            
+            NavigationLink(destination: Text("Destination"), isActive: $action) {
                 EmptyView()
             }
             
             Button {
-                //
+                action = true
             } label: {
                 HStack {
                     Image(systemName: "pencil")
@@ -38,6 +41,7 @@ struct HabitCardView: View {
                                 .foregroundColor(Color("textColor"))
                                 .fontWeight(.light)
                         }
+                        .multilineTextAlignment(.leading)
                         .frame(maxWidth: 300, alignment: .leading)
                         
                         Spacer()
@@ -45,24 +49,26 @@ struct HabitCardView: View {
                         VStack(alignment: .leading, spacing: 5) {
                             Text("Registrado")
                                 .foregroundColor(Color("buttonColor"))
+                                .bold()
+                                .multilineTextAlignment(.leading)
                             Text(vm.value)
                                 .foregroundColor(Color("textColor"))
+                                .bold()
+                                .multilineTextAlignment(.leading)
                         }
-                        .bold()
-                        .multilineTextAlignment(.leading)
-                        
                         Spacer(minLength: 30)
                     }
-                    Rectangle()
-                        .frame(width: 12)
-                        .foregroundColor(vm.state)
                 }
-//                .padding(10)
+                .padding(10)
                 .background(
                     Color.red.opacity(0.03)
                 )
                 .cornerRadius(20)
             }
+            Rectangle()
+                .frame(width: 14, height: 14)
+                .cornerRadius(20)
+                .foregroundColor(vm.state)
         }
         .background(
             RoundedRectangle(cornerRadius: 20)

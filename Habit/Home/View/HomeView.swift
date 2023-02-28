@@ -18,7 +18,7 @@ struct HomeView: View {
         TabView(selection: $selection) {
             vm.habitView()
                 .tabItem {
-                    Image(systemName: "square.gri d.2x2")
+                    Image(systemName: "square.grid.2x2")
                     Text("Hábitos")
                 }
                 .tag(0)

@@ -14,10 +14,9 @@ struct ButtonStyle: ViewModifier {
             .frame(maxWidth: .infinity)
             .frame(height: 26)
             .foregroundColor(.white)
-            .padding(.vertical, 14)
+            .padding(.vertical, 16)
             .padding(.horizontal, 16)
             .font(.title3)
-            .fontWeight(.semibold)
             .background(
                 Color("buttonColor")
             )

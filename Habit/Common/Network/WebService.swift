@@ -15,6 +15,7 @@ enum WebService {
         case postUser = "/users"
         case loginUser = "/auth/login"
         case refreshToken = "/auth/refresh-token"
+        case habits = "/users/me/habits"
     }
     
     enum NetworkError {
@@ -94,6 +95,19 @@ enum WebService {
                     }
                 }.resume()
             }
+    }
+    
+    public static func requestCall_JSON_ReadOwnHabits(
+        path: Endpoint,
+        method: Method = .get,
+        completion: @escaping ((Result) -> Void)
+    ) {
+        requestCall(
+            path: path,
+            method: method,
+            contentType: .json,
+            data: nil,
+            completion: completion)
     }
     
     public static func requestCall_JSON<T: Encodable>(
