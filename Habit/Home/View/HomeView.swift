@@ -30,7 +30,7 @@ struct HomeView: View {
                 }
                 .tag(1)
             
-            Text("Conteúdo de perfil \(selection)")
+            vm.profileView()
                 .tabItem {
                     Image(systemName: "person.crop.circle")
                     Text("Perfil")

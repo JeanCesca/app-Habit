@@ -19,4 +19,8 @@ extension HomeViewModel {
     public func habitView() -> some View {
         return HomeViewRouter.makeHabitView(habitViewModel: viewModel)
     }
+    
+    public func profileView() -> some View {
+        return HomeViewRouter.makeProfileView()
+    }
 }

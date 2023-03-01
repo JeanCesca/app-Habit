@@ -27,8 +27,10 @@ struct HabitCardView: View {
                 action = true
             } label: {
                 HStack {
-                    Image(systemName: "pencil")
-                        .padding(.horizontal, 20)
+                    ImageView(url: vm.icon)
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 52, height: 52)
+                        .clipShape(Circle())
                     
                     Spacer()
                     

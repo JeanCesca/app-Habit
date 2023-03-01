@@ -60,6 +60,10 @@
 		0F9E7AAC29AE74D6000162DA /* HabitValueRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E7AAB29AE74D6000162DA /* HabitValueRequest.swift */; };
 		0F9E7AAF29AE7516000162DA /* HabitDetailRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E7AAE29AE7516000162DA /* HabitDetailRemoteDataSource.swift */; };
 		0F9E7AB129AE7764000162DA /* HabitDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E7AB029AE7764000162DA /* HabitDetailInteractor.swift */; };
+		0F9E7AB329AFA8AB000162DA /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E7AB229AFA8AB000162DA /* ImageView.swift */; };
+		0F9E7ABB29AFC8B1000162DA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E7ABA29AFC8B1000162DA /* ProfileView.swift */; };
+		0F9E7ABD29AFC8F5000162DA /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E7ABC29AFC8F5000162DA /* ProfileViewModel.swift */; };
+		0F9E7AC229AFD0C6000162DA /* GenderSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E7AC129AFD0C6000162DA /* GenderSelectorView.swift */; };
 		0FACA03029953E4000B5D3BB /* SaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA02F29953E4000B5D3BB /* SaveButton.swift */; };
 		0FACA033299562BB00B5D3BB /* EditTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA032299562BB00B5D3BB /* EditTextView.swift */; };
 		0FACA036299576AA00B5D3BB /* CustomTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA035299576AA00B5D3BB /* CustomTextFieldStyle.swift */; };
@@ -123,6 +127,10 @@
 		0F9E7AAB29AE74D6000162DA /* HabitValueRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitValueRequest.swift; sourceTree = "<group>"; };
 		0F9E7AAE29AE7516000162DA /* HabitDetailRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailRemoteDataSource.swift; sourceTree = "<group>"; };
 		0F9E7AB029AE7764000162DA /* HabitDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailInteractor.swift; sourceTree = "<group>"; };
+		0F9E7AB229AFA8AB000162DA /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		0F9E7ABA29AFC8B1000162DA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		0F9E7ABC29AFC8F5000162DA /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		0F9E7AC129AFD0C6000162DA /* GenderSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderSelectorView.swift; sourceTree = "<group>"; };
 		0FACA02F29953E4000B5D3BB /* SaveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButton.swift; sourceTree = "<group>"; };
 		0FACA032299562BB00B5D3BB /* EditTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextView.swift; sourceTree = "<group>"; };
 		0FACA035299576AA00B5D3BB /* CustomTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldStyle.swift; sourceTree = "<group>"; };
@@ -167,6 +175,7 @@
 				0F4A210F28F5DA52009DCE98 /* SignUp */,
 				0F4A210728F5C118009DCE98 /* Home */,
 				0F63F6FC299FAC9F00B633B8 /* Habit */,
+				0F9E7AB429AFC879000162DA /* Profile */,
 				0F9E7A9E29AE5210000162DA /* HabitDetail */,
 				0F1C9A6E28F4D2BC00426F9A /* HabitApp.swift */,
 				0F1C9A7228F4D2BD00426F9A /* Assets.xcassets */,
@@ -468,6 +477,48 @@
 			path = Interactor;
 			sourceTree = "<group>";
 		};
+		0F9E7AB429AFC879000162DA /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				0F9E7ABE29AFC998000162DA /* Router */,
+				0F9E7AB729AFC893000162DA /* ViewModel */,
+				0F9E7AB629AFC890000162DA /* Model */,
+				0F9E7AB529AFC88B000162DA /* View */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		0F9E7AB529AFC88B000162DA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0F9E7ABA29AFC8B1000162DA /* ProfileView.swift */,
+				0F9E7AC129AFD0C6000162DA /* GenderSelectorView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0F9E7AB629AFC890000162DA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0F9E7AB729AFC893000162DA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0F9E7ABC29AFC8F5000162DA /* ProfileViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0F9E7ABE29AFC998000162DA /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
 		0FACA0282995325E00B5D3BB /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -487,6 +538,7 @@
 				0FACA02F29953E4000B5D3BB /* SaveButton.swift */,
 				0FACA032299562BB00B5D3BB /* EditTextView.swift */,
 				0FACA03B29957F6800B5D3BB /* LoadingButtonView.swift */,
+				0F9E7AB229AFA8AB000162DA /* ImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -603,6 +655,7 @@
 				0F63F6F2299E6A6A00B633B8 /* LocalDataSource.swift in Sources */,
 				0FACA03C29957F6800B5D3BB /* LoadingButtonView.swift in Sources */,
 				0F63F706299FADCE00B633B8 /* HabitUIState.swift in Sources */,
+				0F9E7ABD29AFC8F5000162DA /* ProfileViewModel.swift in Sources */,
 				0F63F6E2299D52C400B633B8 /* SignInErrorResponse.swift in Sources */,
 				0F63F6F9299EB57300B633B8 /* SplashRemoteDataSource.swift in Sources */,
 				0F4A20FF28F5A16B009DCE98 /* SignInViewModel.swift in Sources */,
@@ -628,6 +681,8 @@
 				0F9E7AB129AE7764000162DA /* HabitDetailInteractor.swift in Sources */,
 				0F63F703299FACEF00B633B8 /* HabitViewModel.swift in Sources */,
 				0F1C9A8128F4D34700426F9A /* SplashView.swift in Sources */,
+				0F9E7AB329AFA8AB000162DA /* ImageView.swift in Sources */,
+				0F9E7ABB29AFC8B1000162DA /* ProfileView.swift in Sources */,
 				0F63F701299FACBA00B633B8 /* HabitView.swift in Sources */,
 				0F4A211828F5DF02009DCE98 /* Gender.swift in Sources */,
 				0F9E7A9929AE348D000162DA /* HabitRemoteDataSource.swift in Sources */,
@@ -642,6 +697,7 @@
 				0F9E7AA529AE5284000162DA /* HabitDetailViewModel.swift in Sources */,
 				0F63F6DF299D350300B633B8 /* SignInResponse.swift in Sources */,
 				0F9E7A9629AE3299000162DA /* HabitResponse.swift in Sources */,
+				0F9E7AC229AFD0C6000162DA /* GenderSelectorView.swift in Sources */,
 				0F4A20FD28F5A132009DCE98 /* SignInView.swift in Sources */,
 				0FACA033299562BB00B5D3BB /* EditTextView.swift in Sources */,
 				0F9E7AAF29AE7516000162DA /* HabitDetailRemoteDataSource.swift in Sources */,

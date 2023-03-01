@@ -100,7 +100,7 @@ extension SignInView {
                 .foregroundColor(.gray)
                 .padding(.top)
             ZStack {
-                NavigationLink(tag: 1, selection: $action, destination: {
+                 NavigationLink(tag: 1, selection: $action, destination: {
                     vm.signUpView()
                 }) {
                     EmptyView()
