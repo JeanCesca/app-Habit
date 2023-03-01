@@ -10,6 +10,7 @@ import SwiftUI
 struct HabitDetailView: View {
     
     @ObservedObject var vm: HabitDetailViewModel
+    @Environment(\.dismiss) var dismiss
     
     init(vm: HabitDetailViewModel) {
         self.vm = vm
@@ -40,13 +41,17 @@ struct HabitDetailView: View {
             Text("Hábitos se constroem todos os dias 🐸")
             
             LoadingButtonView(action: {
-                
+                self.vm.save()
             }, text: "Salvar", showProgressBar: self.vm.uiState == .loading, disabled: self.vm.value.isEmpty)
             .padding(.horizontal)
             .padding(.top, 28)
             
             Button("Cancelar") {
-                //dismiss
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                    withAnimation(.easeOut(duration: 1)) {
+                        self.dismiss()
+                    }
+                }
             }
             .modifier(ButtonStyle())
             .padding()
@@ -54,6 +59,15 @@ struct HabitDetailView: View {
             Spacer()
         }
         .padding(.top, 60)
+        .onAppear {
+            vm.$uiState
+                .sink { uiState in
+                    if uiState == .success {
+                        self.dismiss()
+                    }
+                }
+                .store(in: &vm.cancellables)
+        }
     }
 }
 
@@ -63,8 +77,9 @@ struct HabitDetailView_Previews: PreviewProvider {
             HabitDetailView(vm: HabitDetailViewModel(
                 id: 1,
                 name: "Ouvir The Knife - Networking",
-                label: "2h"))
-                .preferredColorScheme($0)
+                label: "2h",
+                interactor: HabitDetailInteractor()))
+            .preferredColorScheme($0)
         }
     }
 }

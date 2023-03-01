@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct HabitCardView: View {
     
@@ -17,10 +18,7 @@ struct HabitCardView: View {
         ZStack(alignment: .trailing) {
             
             NavigationLink(
-                destination: HabitDetailView(vm: HabitDetailViewModel(
-                    id: vm.id,
-                    name: vm.name,
-                    label: vm.label)),
+                destination: vm.habitDetailView(),
                 isActive: $action) {
                 EmptyView()
             }
@@ -90,7 +88,7 @@ struct HabitCardView_Previews: PreviewProvider {
             NavigationView {
                 List {
                     HabitCardView(vm: HabitCardViewModel(
-                        id: 1,
+                        publisher: PassthroughSubject<Bool, Never>(), id: 1,
                         icon: "https://via.placeholder.com/150",
                         date: "01/01/2023 00:00:00",
                         name: "Ouvir The Knife",
@@ -98,7 +96,7 @@ struct HabitCardView_Previews: PreviewProvider {
                         value: "2",
                         state: .green))
                     HabitCardView(vm: HabitCardViewModel(
-                        id: 1,
+                        publisher: PassthroughSubject<Bool, Never>(), id: 1,
                         icon: "https://via.placeholder.com/150",
                         date: "01/01/2023 00:00:00",
                         name: "Ouvir The Knife",
@@ -106,7 +104,7 @@ struct HabitCardView_Previews: PreviewProvider {
                         value: "2",
                         state: .green))
                     HabitCardView(vm: HabitCardViewModel(
-                        id: 1,
+                        publisher: PassthroughSubject<Bool, Never>(), id: 1,
                         icon: "https://via.placeholder.com/150",
                         date: "01/01/2023 00:00:00",
                         name: "Ouvir The Knife",

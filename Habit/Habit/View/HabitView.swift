@@ -46,7 +46,7 @@ struct HabitView: View {
         }
         .onAppear {
             if !vm.opened {
-                vm.onAppear()
+                vm.fetchHabits()
             }
         }
     }

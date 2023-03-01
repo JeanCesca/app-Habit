@@ -23,7 +23,7 @@ class SignUpViewModel: ObservableObject {
     private let interactor: SignUpInteractor
     
     //Combine
-    var publisher: PassthroughSubject<Bool, Never>!
+    var publisher: PassthroughSubject<Bool, Never>?
     private var cancellableSignUp: AnyCancellable?
     private var cancellableSignIn: AnyCancellable?
     
@@ -83,7 +83,7 @@ class SignUpViewModel: ObservableObject {
                             
                             self?.interactor.insertAuth(userAuth: auth)
                             
-                            self?.publisher.send(successSignUp)
+                            self?.publisher?.send(successSignUp)
                             self?.uiState = .success
                         }
                 }

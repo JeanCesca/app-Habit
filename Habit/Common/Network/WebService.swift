@@ -16,6 +16,7 @@ enum WebService {
         case loginUser = "/auth/login"
         case refreshToken = "/auth/refresh-token"
         case habits = "/users/me/habits"
+        case habitValues = "/users/me/habits/%d/values"
     }
     
     enum NetworkError {
@@ -42,13 +43,13 @@ enum WebService {
         case delete = "DELETE"
     }
     
-    private static func completeUrl(path: Endpoint) -> URLRequest? {
-        guard let url = URL(string: "\(Endpoint.base.rawValue)\(path.rawValue)") else { return nil }
+    private static func completeUrl(path: String) -> URLRequest? {
+        guard let url = URL(string: "\(Endpoint.base.rawValue)\(path)") else { return nil }
         return URLRequest(url: url)
     }
     
     private static func requestCall(
-        path: Endpoint,
+        path: String,
         method: Method,
         contentType: ContentType,
         data: Data?,
@@ -103,7 +104,7 @@ enum WebService {
         completion: @escaping ((Result) -> Void)
     ) {
         requestCall(
-            path: path,
+            path: path.rawValue,
             method: method,
             contentType: .json,
             data: nil,
@@ -111,7 +112,7 @@ enum WebService {
     }
     
     public static func requestCall_JSON<T: Encodable>(
-        path: Endpoint,
+        path: String,
         method: Method = .get,
         body: T,
         completion: @escaping ((Result) -> Void)
@@ -128,6 +129,24 @@ enum WebService {
             completion: completion)
     }
     
+    public static func requestCall_JSON<T: Encodable>(
+        path: Endpoint,
+        method: Method = .get,
+        body: T,
+        completion: @escaping ((Result) -> Void)
+    ) {
+        // 0. Criar um objeto JSON
+        //abrir uma requisição e enviar os valores dos par6ametros, e esperar um valor
+        guard let jsonData = try? JSONEncoder().encode(body) else { return }
+        
+        requestCall(
+            path: path.rawValue,
+            method: method,
+            contentType: .json,
+            data: jsonData,
+            completion: completion)
+    }
+    
     public static func requestCall_FormData(
         path: Endpoint,
         method: Method = .post,
@@ -135,22 +154,17 @@ enum WebService {
         completion: @escaping ((Result) -> Void)
     ) {
         
-        guard let urlRequest = completeUrl(path: path) else { return }
+        guard let urlRequest = completeUrl(path: path.rawValue) else { return }
         guard let absoluteUrl = urlRequest.url?.absoluteString else { return }
         
         var components = URLComponents(string: absoluteUrl)
         components?.queryItems = params
                 
         requestCall(
-            path: path,
+            path: path.rawValue,
             method: method,
             contentType: .formUrl,
             data: components?.query?.data(using: .utf8),
             completion: completion)
-    }
-    
-    static func loginUser(request: SignInRequest, completion: @escaping (SignInResponse?, SignInErrorResponse?) -> Void) {
-                
-
     }
 }

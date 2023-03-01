@@ -5,10 +5,12 @@
 //  Created by Jean Ricardo Cesca on 17/02/23.
 //
 
-import Foundation
+import Combine
 import SwiftUI
 
 struct HabitCardViewModel: Identifiable, Equatable {
+    
+    let publisher: PassthroughSubject<Bool, Never>
     
     var id: Int = 0
     
@@ -21,5 +23,11 @@ struct HabitCardViewModel: Identifiable, Equatable {
     
     static func == (lhs: HabitCardViewModel, rhs: HabitCardViewModel) -> Bool {
         return lhs.id == rhs.id
+    }
+}
+
+extension HabitCardViewModel {
+    public func habitDetailView() -> some View {
+        return HabitCardViewRouter.makeHabitDetailView(id: id, name: name, label: label, habitPublisher: publisher)
     }
 }

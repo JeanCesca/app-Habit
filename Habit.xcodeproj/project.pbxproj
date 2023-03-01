@@ -56,6 +56,10 @@
 		0F9E7AA329AE5239000162DA /* HabitDetailUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E7AA229AE5239000162DA /* HabitDetailUIState.swift */; };
 		0F9E7AA529AE5284000162DA /* HabitDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E7AA429AE5284000162DA /* HabitDetailViewModel.swift */; };
 		0F9E7AA829AE530F000162DA /* HabitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E7AA729AE530F000162DA /* HabitDetailView.swift */; };
+		0F9E7AAA29AE6A28000162DA /* HabitCardViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E7AA929AE6A28000162DA /* HabitCardViewRouter.swift */; };
+		0F9E7AAC29AE74D6000162DA /* HabitValueRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E7AAB29AE74D6000162DA /* HabitValueRequest.swift */; };
+		0F9E7AAF29AE7516000162DA /* HabitDetailRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E7AAE29AE7516000162DA /* HabitDetailRemoteDataSource.swift */; };
+		0F9E7AB129AE7764000162DA /* HabitDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F9E7AB029AE7764000162DA /* HabitDetailInteractor.swift */; };
 		0FACA03029953E4000B5D3BB /* SaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA02F29953E4000B5D3BB /* SaveButton.swift */; };
 		0FACA033299562BB00B5D3BB /* EditTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA032299562BB00B5D3BB /* EditTextView.swift */; };
 		0FACA036299576AA00B5D3BB /* CustomTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA035299576AA00B5D3BB /* CustomTextFieldStyle.swift */; };
@@ -115,6 +119,10 @@
 		0F9E7AA229AE5239000162DA /* HabitDetailUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailUIState.swift; sourceTree = "<group>"; };
 		0F9E7AA429AE5284000162DA /* HabitDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailViewModel.swift; sourceTree = "<group>"; };
 		0F9E7AA729AE530F000162DA /* HabitDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailView.swift; sourceTree = "<group>"; };
+		0F9E7AA929AE6A28000162DA /* HabitCardViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCardViewRouter.swift; sourceTree = "<group>"; };
+		0F9E7AAB29AE74D6000162DA /* HabitValueRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitValueRequest.swift; sourceTree = "<group>"; };
+		0F9E7AAE29AE7516000162DA /* HabitDetailRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailRemoteDataSource.swift; sourceTree = "<group>"; };
+		0F9E7AB029AE7764000162DA /* HabitDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailInteractor.swift; sourceTree = "<group>"; };
 		0FACA02F29953E4000B5D3BB /* SaveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButton.swift; sourceTree = "<group>"; };
 		0FACA032299562BB00B5D3BB /* EditTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTextView.swift; sourceTree = "<group>"; };
 		0FACA035299576AA00B5D3BB /* CustomTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextFieldStyle.swift; sourceTree = "<group>"; };
@@ -382,6 +390,7 @@
 		0F63F6FE299FACA900B633B8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0F63F70C299FEC2500B633B8 /* HabitCardView.swift */,
 				0F63F700299FACBA00B633B8 /* HabitView.swift */,
 			);
 			path = View;
@@ -392,6 +401,7 @@
 			children = (
 				0F63F702299FACEF00B633B8 /* HabitViewModel.swift */,
 				0F63F70A299FEB0D00B633B8 /* HabitCardViewModel.swift */,
+				0F9E7AA929AE6A28000162DA /* HabitCardViewRouter.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -416,6 +426,7 @@
 		0F9E7A9E29AE5210000162DA /* HabitDetail */ = {
 			isa = PBXGroup;
 			children = (
+				0F9E7AAD29AE7503000162DA /* Interactor */,
 				0F9E7AA129AE5222000162DA /* ViewModel */,
 				0F9E7AA029AE521E000162DA /* View */,
 				0F9E7A9F29AE521B000162DA /* Model */,
@@ -427,6 +438,7 @@
 			isa = PBXGroup;
 			children = (
 				0F9E7AA229AE5239000162DA /* HabitDetailUIState.swift */,
+				0F9E7AAB29AE74D6000162DA /* HabitValueRequest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -445,6 +457,15 @@
 				0F9E7AA429AE5284000162DA /* HabitDetailViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		0F9E7AAD29AE7503000162DA /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				0F9E7AAE29AE7516000162DA /* HabitDetailRemoteDataSource.swift */,
+				0F9E7AB029AE7764000162DA /* HabitDetailInteractor.swift */,
+			);
+			path = Interactor;
 			sourceTree = "<group>";
 		};
 		0FACA0282995325E00B5D3BB /* Common */ = {
@@ -466,7 +487,6 @@
 				0FACA02F29953E4000B5D3BB /* SaveButton.swift */,
 				0FACA032299562BB00B5D3BB /* EditTextView.swift */,
 				0FACA03B29957F6800B5D3BB /* LoadingButtonView.swift */,
-				0F63F70C299FEC2500B633B8 /* HabitCardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -592,17 +612,20 @@
 				0F9E7A9B29AE3715000162DA /* HabitInteractor.swift in Sources */,
 				0F4A210C28F5C131009DCE98 /* HomeView.swift in Sources */,
 				0F63F70D299FEC2500B633B8 /* HabitCardView.swift in Sources */,
+				0F9E7AAA29AE6A28000162DA /* HabitCardViewRouter.swift in Sources */,
 				0F9E7AA329AE5239000162DA /* HabitDetailUIState.swift in Sources */,
 				0F63F6F4299EA1FB00B633B8 /* SplashInteractor.swift in Sources */,
 				0F4A210628F5C0D0009DCE98 /* SignInViewRouter.swift in Sources */,
 				0F63F6DD299D33C100B633B8 /* SignInRequest.swift in Sources */,
 				0F63F6E7299D663100B633B8 /* SignInRemoteDataSource.swift in Sources */,
 				0F4A211C28F5E41B009DCE98 /* SignUpViewModel.swift in Sources */,
+				0F9E7AAC29AE74D6000162DA /* HabitValueRequest.swift in Sources */,
 				0F63F70B299FEB0D00B633B8 /* HabitCardViewModel.swift in Sources */,
 				0F63F6EE299E5A5A00B633B8 /* SignUpRemoteDataSource.swift in Sources */,
 				0F4A211A28F5E3D0009DCE98 /* SignUpUIState.swift in Sources */,
 				0F63F6FB299FAC8300B633B8 /* HomeViewRouter.swift in Sources */,
 				0FACA03029953E4000B5D3BB /* SaveButton.swift in Sources */,
+				0F9E7AB129AE7764000162DA /* HabitDetailInteractor.swift in Sources */,
 				0F63F703299FACEF00B633B8 /* HabitViewModel.swift in Sources */,
 				0F1C9A8128F4D34700426F9A /* SplashView.swift in Sources */,
 				0F63F701299FACBA00B633B8 /* HabitView.swift in Sources */,
@@ -621,6 +644,7 @@
 				0F9E7A9629AE3299000162DA /* HabitResponse.swift in Sources */,
 				0F4A20FD28F5A132009DCE98 /* SignInView.swift in Sources */,
 				0FACA033299562BB00B5D3BB /* EditTextView.swift in Sources */,
+				0F9E7AAF29AE7516000162DA /* HabitDetailRemoteDataSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

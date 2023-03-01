@@ -59,24 +59,6 @@ class SignInViewModel: ObservableObject {
                 self?.uiState = .goToHomeScreen
             }
     }
-
-
-        
-//        interactor.loginUser(loginRequest: SignInRequest(email: email, password: password)) { successResponse, errorResponse in
-//
-//            if let errorResponse = errorResponse {
-//                DispatchQueue.main.async {
-//                }
-//            }
-//
-//            if let successResponse = successResponse {
-//                DispatchQueue.main.async {
-//                    print(successResponse)
-//                    self.uiState = .goToHomeScreen
-//                }
-//            }
-//
-//        }
     
     func addSubscribers() {
         cancellable = publisher.sink(receiveValue: { value in
