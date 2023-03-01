@@ -126,7 +126,7 @@ extension SignUpView {
                     .tag(value)
             }
         }
-        .pickerStyle(.segmented)
+        .pickerStyle(.menu)
         .padding(.top, 18)
         .padding(.bottom, 18)
     }

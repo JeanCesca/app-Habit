@@ -16,14 +16,6 @@ struct SignUpRequest: Encodable {
     let birthday: String
     let gender: Int
     
-//    "name": String,
-//    "email": String,
-//    "document": String,
-//    "phone": String,
-//    "gender": Int,
-//    "birthday": String,
-//    "password": String
-    
     enum CodingKeys: String, CodingKey {
         case fullName = "name"
         case email, password, document, phone, birthday, gender

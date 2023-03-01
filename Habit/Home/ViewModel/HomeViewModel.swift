@@ -10,17 +10,17 @@ import SwiftUI
 
 class HomeViewModel: ObservableObject {
     
-    let viewModel = HabitViewModel(interactor: HabitInteractor())
-    
+    let habitViewModel = HabitViewModel(interactor: HabitInteractor())
+    let profileViewModel = ProfileViewModel()
 }
 
 extension HomeViewModel {
     
     public func habitView() -> some View {
-        return HomeViewRouter.makeHabitView(habitViewModel: viewModel)
+        return HomeViewRouter.makeHabitView(habitViewModel: habitViewModel)
     }
     
     public func profileView() -> some View {
-        return HomeViewRouter.makeProfileView()
+        return HomeViewRouter.makeProfileView(profileViewModel: profileViewModel)
     }
 }

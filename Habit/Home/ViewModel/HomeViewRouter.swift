@@ -14,7 +14,7 @@ enum HomeViewRouter {
         return HabitView(vm: habitViewModel)
     }
     
-    static func makeProfileView() -> some View {
-        return ProfileView(vm: ProfileViewModel())
+    static func makeProfileView(profileViewModel: ProfileViewModel) -> some View {
+        return ProfileView(vm: profileViewModel)
     }
 }

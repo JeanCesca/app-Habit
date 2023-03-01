@@ -17,7 +17,7 @@ class SignUpViewModel: ObservableObject {
     @Published var document: String = ""
     @Published var phone: String = ""
     @Published var birthday: String = ""
-    @Published var gender: Gender = Gender.male
+    @Published var gender: Gender = Gender.cisMale
     
     //Interactor
     private let interactor: SignUpInteractor

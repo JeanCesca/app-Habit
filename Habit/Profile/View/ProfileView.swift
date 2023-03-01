@@ -11,14 +11,6 @@ struct ProfileView: View {
     
     @ObservedObject var vm: ProfileViewModel
     
-    @State var fullName: String = ""
-    @State var email: String = "teste@gmail.com"
-    @State var document: String = "111.222.333-11"
-    @State var phone: String = "(11) 9 9393-8998"
-    @State var birthday: String = "03/10/1992"
-    
-    @State var selectedGender: Gender? = .male
-
     
     var body: some View {
         NavigationView {
@@ -28,56 +20,73 @@ struct ProfileView: View {
                         HStack {
                             Text("Nome")
                             Spacer()
-                            TextField("Digite seu nome", text: $fullName)
+                            TextField("Digite seu nome", text: $vm.fullNameValidation.value)
                                 .multilineTextAlignment(.trailing)
                                 .keyboardType(.alphabet)
+                            vm.fullNameValidation.failure ?
+                            Image(systemName: "xmark.seal")
+                                .foregroundColor(.red)
+                            : Image(systemName: "checkmark.seal")
+                                .foregroundColor(.green)
                         }
+                        
                         HStack {
                             Text("E-mail")
                             Spacer()
-                            TextField("", text: $email)
+                            TextField("", text: $vm.email)
                                 .disabled(true)
                                 .multilineTextAlignment(.trailing)
+                            Image(systemName: "checkmark.seal")
+                                .foregroundColor(.green)
                         }
                         HStack {
                             Text("CPF")
                             Spacer()
-                            TextField("Digite seu CPF", text: $document)
+                            TextField("Digite seu CPF", text: $vm.document)
                                 .disabled(true)
                                 .multilineTextAlignment(.trailing)
                                 .keyboardType(.numberPad)
+                            Image(systemName: "checkmark.seal")
+                                .foregroundColor(.green)
                         }
                         HStack {
                             Text("Telefone")
                             Spacer()
-                            TextField("Digite seu celular", text: $phone)
+                            TextField("Digite seu celular", text: $vm.phoneValidation.value)
                                 .multilineTextAlignment(.trailing)
                                 .keyboardType(.numberPad)
+                            vm.phoneValidation.failure ?
+                            Image(systemName: "xmark.seal")
+                                .foregroundColor(.red)
+                            : Image(systemName: "checkmark.seal")
+                                .foregroundColor(.green)
                         }
                         HStack {
                             Text("Data de Nascimento")
-                            Spacer(minLength: 4)
-                            TextField("Digite sua data de nascimento", text: $birthday)
+                            Spacer(minLength: 1)
+                            TextField("dd/MM/yyyy", text: $vm.birthdayValidation.value)
                                 .multilineTextAlignment(.trailing)
+                            vm.birthdayValidation.failure ?
+                            Image(systemName: "xmark.seal")
+                                .foregroundColor(.red)
+                            : Image(systemName: "checkmark.seal")
+                                .foregroundColor(.green)
                         }
                         NavigationLink {
                             GenderSelectorView(
                                 title: "",
                                 genders: Gender.allCases,
-                                selectedGender: $selectedGender)
+                                selectedGender: $vm.selectedGender)
                         } label: {
                             HStack {
                                 Text("Gênero")
                                 Spacer()
-                                Text(selectedGender?.rawValue ?? "")
+                                Text(vm.selectedGender?.rawValue ?? "")
                             }
                         }
-
-
                     } header: {
                         Text("Dados cadastrais")
                     }
-
                 }
             }
             .navigationTitle("Editar Perfil")
