@@ -25,8 +25,10 @@ class ProfileViewModel: ObservableObject {
     @Published var phoneValidation = PhoneValidation()
     @Published var birthdayValidation = BirthdayValidation()
     
-    //Cancellables
-    private var cancellable: AnyCancellable?
+    //Cancellables - fetch
+    private var cancellableFetchUser: AnyCancellable?
+    //Cancellables - update
+    private var cancellableUpdateUser: AnyCancellable?
     
     //Interactor
     private let interactor: ProfileInteractor
@@ -37,13 +39,14 @@ class ProfileViewModel: ObservableObject {
     }
     
     deinit {
-        cancellable?.cancel()
+        cancellableFetchUser?.cancel()
+        cancellableUpdateUser?.cancel()
     }
     
     public func fetchUser() {
         self.uiState = .loading
         
-        cancellable = interactor.fetchUser()
+        cancellableFetchUser = interactor.fetchUser()
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { [weak self] completion in
                 switch completion {
@@ -80,6 +83,49 @@ class ProfileViewModel: ObservableObject {
                 
                 self?.birthdayValidation.value = birthday
             })
+    }
+    
+    public func updateUser() {
+        self.uiState = .updateLoading
+        
+        //Id e Gender
+        guard let userId = userId,
+              let gender = gender else { return }
+        
+        //Birthday
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.dateFormat = "dd/MM/yyyy"
+        
+        let dateFormatted = formatter.date(from: birthdayValidation.value)
+        
+        guard let dateFormatted = dateFormatted else {
+            self.uiState = .updateError("Data inválida \(birthdayValidation.value)")
+            return
+        }
+        
+        formatter.dateFormat = "yyyy-MM-dd"
+        let birthday = formatter.string(from: dateFormatted)
+        
+//        self.birthdayValidation.value = birthday
+        
+        cancellableUpdateUser = interactor.updateUser(userId: userId, profileRequest:
+                                ProfileUpdateRequest(
+                                    fullName: fullNameValidation.value,
+                                    phone: phoneValidation.value,
+                                    birthday: birthday,
+                                    gender: gender.index))
+        .receive(on: DispatchQueue.main)
+        .sink { [weak self] completion in
+            switch completion {
+            case .failure(let error):
+                self?.uiState = .fetchError(error.message)
+            case .finished:
+                break
+            }
+        } receiveValue: { [weak self] response in
+            self?.uiState = .updateSuccess
+        }
     }
 }
 

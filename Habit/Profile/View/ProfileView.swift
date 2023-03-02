@@ -32,20 +32,35 @@ struct ProfileView: View {
                             }
                             
                         }
-                        
                     }
                     .navigationTitle("Editar Perfil")
                     .toolbar {
                         ToolbarItem(placement: .navigationBarTrailing) {
-                            checkmark
-                            
+                            Button {
+                                vm.updateUser()
+                            } label: {
+                                if case ProfileUIState.updateLoading = vm.uiState {
+                                    ProgressView()
+                                } else {
+                                    checkmark
+                                }
+                            }
+                            .alert("Yey!\nDados atualizados com sucesso!\n✨✨✨✨✨", isPresented: .constant(vm.uiState == .updateSuccess)) {
+                                //todo after clicking: OK
+                            }
                         }
                     }
                 }
             }
+            
+            //Error screen for UPDATE
+            if case ProfileUIState.updateError(let error) = vm.uiState {
+                showAlert(title: "Erro ao editar dados do usuário!", message: "👾👾👾👾👾\n(\(error))")
+            }
 
+            //Error screen for FETCH
             if case ProfileUIState.fetchError(let error) = vm.uiState {
-                showAlert(value: error)
+                showAlert(title: "Erro ao carregar dados do usuário!", message: "👾👾👾👾👾👾\n(\(error))")
             }
         }
         .onAppear {
@@ -54,9 +69,17 @@ struct ProfileView: View {
     }
     
     var isDisabled: Bool {
-        return vm.fullNameValidation.failure
-        || vm.phoneValidation.failure
-        || vm.birthdayValidation.failure
+        if vm.fullNameValidation.value.isEmpty
+            || vm.phoneValidation.value.isEmpty
+            || vm.birthdayValidation.value.isEmpty {
+            return true
+        } else if vm.fullNameValidation.failure
+                    || vm.phoneValidation.failure
+                    || vm.birthdayValidation.failure {
+            return true
+        } else {
+            return false
+        }
     }
 }
 
@@ -165,14 +188,14 @@ extension ProfileView {
 }
 
 extension ProfileView {
-    func showAlert(value: String) -> some View {
+    func showAlert(title: String, message: String) -> some View {
         Text("")
             .alert(isPresented: .constant(true)) {
                 Alert(
-                    title: Text("Erro!"),
-                    message: Text(value),
+                    title: Text(title),
+                    message: Text(message),
                     dismissButton: .default(Text("Ok")) {
-                    //faz algo quando some o alerta
+                        vm.uiState = .none
                 })
             }
     }
