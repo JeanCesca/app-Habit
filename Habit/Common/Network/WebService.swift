@@ -13,6 +13,7 @@ enum WebService {
     enum Endpoint: String {
         case base = "https://habitplus-api.tiagoaguiar.co"
         case postUser = "/users"
+        case fetchUser = "/users/me"
         case loginUser = "/auth/login"
         case refreshToken = "/auth/refresh-token"
         case habits = "/users/me/habits"
@@ -79,10 +80,7 @@ enum WebService {
                         return
                     }
                     
-        //            print(String(data: data, encoding: .utf8))
-
                     if let response = response as? HTTPURLResponse {
-        //                print(response)
                         switch response.statusCode {
                         case 200:
                             completion(.success(data))
@@ -98,7 +96,7 @@ enum WebService {
             }
     }
     
-    public static func requestCall_JSON_ReadOwnHabits(
+    public static func requestCall_JSON_ReadOnly(
         path: Endpoint,
         method: Method = .get,
         completion: @escaping ((Result) -> Void)
