@@ -6,15 +6,25 @@
 //
 
 import SwiftUI
+import Charts
 
 struct ChartView: View {
+    
+    @StateObject var vm: ChartViewModel
+    
     var body: some View {
-        Text("Hello, World!")
-    }
+        BoxChartView(entries: $vm.entries, dates: $vm.dates)
+            .frame(maxWidth: .infinity, maxHeight: 300)
+            .padding()
+    } 
 }
 
 struct ChartView_Previews: PreviewProvider {
     static var previews: some View {
-        ChartView()
+        Group {
+            ChartView(vm: ChartViewModel())
+            ChartView(vm: ChartViewModel())
+                .preferredColorScheme(.dark)
+        }
     }
 }
