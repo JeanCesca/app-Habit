@@ -11,6 +11,8 @@ import Combine
 
 class HabitViewModel: ObservableObject {
     
+    public let isCharts: Bool
+    
     @Published var uiState: HabitUIState = .loading
     
     @Published var description: String = ""
@@ -27,7 +29,8 @@ class HabitViewModel: ObservableObject {
     private var cancellableNotify: AnyCancellable?
 
     
-    init(interactor: HabitInteractor) {
+    init(isCharts: Bool, interactor: HabitInteractor) {
+        self.isCharts = isCharts
         self.interactor = interactor
         updateHabits()
     }
@@ -107,41 +110,4 @@ class HabitViewModel: ObservableObject {
                 state: state)
         }
     }
-    
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//
-//            var listRows: [HabitCardViewModel] = []
-//
-//            listRows.append(HabitCardViewModel(
-//                id: 1,
-//                icon: "https://via.placeholder.com/150",
-//                date: "01/01/2023 00:00:00",
-//                name: "Ouvir The Knife",
-//                label: "horas",
-//                value: "2",
-//                state: .green))
-//
-//            listRows.append(HabitCardViewModel(
-//                id: 2,
-//                icon: "https://via.placeholder.com/150",
-//                date: "01/01/2023 00:00:00",
-//                name: "Ouvir The Strokes",
-//                label: "horas",
-//                value: "2",
-//                state: .green))
-//
-//            listRows.append(HabitCardViewModel(
-//                id: 3,
-//                icon: "https://via.placeholder.com/150",
-//                date: "01/01/2023 00:00:00",
-//                name: "Malhar",
-//                label: "horas",
-//                value: "2",
-//                state: .green))
-            
-//            self.uiState = .fullList(listRows)
-//            self.uiState = .error("Falha interna no servidor!")
-
-
 }

@@ -10,7 +10,9 @@ import SwiftUI
 
 class HomeViewModel: ObservableObject {
     
-    let habitViewModel = HabitViewModel(interactor: HabitInteractor())
+    //construtores das ViewModels
+    let habitViewModel = HabitViewModel(isCharts: false, interactor: HabitInteractor())
+    let habitForChartsViewModel = HabitViewModel(isCharts: true, interactor: HabitInteractor())
     let profileViewModel = ProfileViewModel(interactor: ProfileInteractor())
 }
 
@@ -18,6 +20,10 @@ extension HomeViewModel {
     
     public func habitView() -> some View {
         return HomeViewRouter.makeHabitView(habitViewModel: habitViewModel)
+    }
+    
+    public func habitForChartView() -> some View {
+        return HomeViewRouter.makeHabitView(habitViewModel: habitForChartsViewModel)
     }
     
     public func profileView() -> some View {

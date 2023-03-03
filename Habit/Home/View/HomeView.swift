@@ -23,7 +23,7 @@ struct HomeView: View {
                 }
                 .tag(0)
             
-            Text("Conteúdo de gráficos \(selection)")
+            vm.habitForChartView()
                 .tabItem {
                     Image(systemName: "chart.bar")
                     Text("Gráficos")

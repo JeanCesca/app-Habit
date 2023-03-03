@@ -11,18 +11,27 @@ import Combine
 struct HabitCardView: View {
     
     let vm: HabitCardViewModel
+    let isChart: Bool
     
     @State private var action = false
     
     var body: some View {
         ZStack(alignment: .trailing) {
             
-            NavigationLink(
-                destination: vm.habitDetailView(),
-                isActive: $action) {
-                EmptyView()
+            if isChart {
+                NavigationLink(
+                    destination: vm.chartView(),
+                    isActive: $action) {
+                    EmptyView()
+                }
+            } else {
+                NavigationLink(
+                    destination: vm.habitDetailView(),
+                    isActive: $action) {
+                    EmptyView()
+                }
             }
-            
+
             Button {
                 action = true
             } label: {
@@ -70,10 +79,12 @@ struct HabitCardView: View {
                 )
                 .cornerRadius(20)
             }
-            Rectangle()
-                .frame(width: 14, height: 14)
-                .cornerRadius(20)
-                .foregroundColor(vm.state)
+            if !isChart {
+                Rectangle()
+                    .frame(width: 14, height: 14)
+                    .cornerRadius(20)
+                    .foregroundColor(vm.state)
+            }
         }
         .background(
             RoundedRectangle(cornerRadius: 20)
@@ -96,7 +107,7 @@ struct HabitCardView_Previews: PreviewProvider {
                         name: "Ouvir The Knife",
                         label: "horas",
                         value: "2",
-                        state: .green))
+                        state: .green), isChart: false)
                     HabitCardView(vm: HabitCardViewModel(
                         publisher: PassthroughSubject<Bool, Never>(), id: 1,
                         icon: "https://via.placeholder.com/150",
@@ -104,7 +115,7 @@ struct HabitCardView_Previews: PreviewProvider {
                         name: "Ouvir The Knife",
                         label: "horas",
                         value: "2",
-                        state: .green))
+                        state: .green), isChart: false)
                     HabitCardView(vm: HabitCardViewModel(
                         publisher: PassthroughSubject<Bool, Never>(), id: 1,
                         icon: "https://via.placeholder.com/150",
@@ -112,7 +123,7 @@ struct HabitCardView_Previews: PreviewProvider {
                         name: "Ouvir The Knife",
                         label: "horas",
                         value: "2",
-                        state: .green))
+                        state: .green), isChart: false)
                 }
                 .frame(maxWidth: .infinity)
                 .navigationTitle("Lista")

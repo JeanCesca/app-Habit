@@ -14,7 +14,7 @@ struct ProfileView: View {
     var body: some View {
         ZStack {
             
-            if case ProfileUIState.loading = vm.uiState {
+            if case ProfileUIState.loading  = vm.uiState {
                 ProgressView()
             } else {
                 NavigationView {

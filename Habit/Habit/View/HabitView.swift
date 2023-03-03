@@ -9,9 +9,10 @@ import SwiftUI
 
 struct HabitView: View {
     
-    @StateObject var vm: HabitViewModel
+    @ObservedObject var vm: HabitViewModel
     
     var body: some View {
+        
         ZStack {
             if case HabitUIState.loading = vm.uiState {
                 progressView
@@ -19,8 +20,11 @@ struct HabitView: View {
                 NavigationView {
                     ScrollView(showsIndicators: false) {
                         VStack {
-                            topContainer
-                            addButton
+                            
+                            if !vm.isCharts {
+                                topContainer
+                                addButton
+                            }
                             
                             if case HabitUIState.emptyList = vm.uiState {
                                 Spacer(minLength: 60)
@@ -28,7 +32,9 @@ struct HabitView: View {
                                 
                             } else if case HabitUIState.fullList(let listRow) = vm.uiState {
                                 LazyVStack(spacing: 12) {
-                                    ForEach(listRow, content: HabitCardView.init(vm:))
+                                    ForEach(listRow) { row in
+                                        HabitCardView(vm: row, isChart: vm.isCharts)
+                                    }
                                 }
                                 .padding(.horizontal, 16)
                                 
@@ -111,10 +117,10 @@ struct HabitView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             NavigationView {
-                HomeViewRouter.makeHabitView(habitViewModel: HabitViewModel(interactor: HabitInteractor()))
+                HomeViewRouter.makeHabitView(habitViewModel: HabitViewModel(isCharts: false, interactor: HabitInteractor()))
             }
             NavigationView {
-                HomeViewRouter.makeHabitView(habitViewModel: HabitViewModel(interactor: HabitInteractor()))
+                HomeViewRouter.makeHabitView(habitViewModel: HabitViewModel(isCharts: false, interactor: HabitInteractor()))
                     .preferredColorScheme(.dark)
             }
         }
