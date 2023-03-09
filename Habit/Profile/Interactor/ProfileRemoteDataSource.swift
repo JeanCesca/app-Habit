@@ -16,7 +16,7 @@ class ProfileRemoteDataSource {
     
     func fetchUser() -> Future<ProfileResponse, AppError> {
         Future<ProfileResponse, AppError> { promise in
-            WebService.requestCall_JSON_ReadOnly(path: .fetchUser, method: .get) { result in
+            WebService.requestCall_ReadOnly(path: .fetchUser, method: .get) { result in
                 switch result {
                 case .success(let data):
                     guard let response = try? JSONDecoder().decode(ProfileResponse.self, from: data) else {

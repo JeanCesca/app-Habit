@@ -18,7 +18,7 @@ class HabitRemoteDataSource { //SINGLETON
         
         Future<[HabitResponse], AppError> { promise in
             
-            WebService.requestCall_JSON_ReadOnly(path: .habits, method: .get) { result in
+            WebService.requestCall_ReadOnly(path: .habits, method: .get) { result in
                 switch result {
                 case .failure(_, let data):
                     if let data = data {

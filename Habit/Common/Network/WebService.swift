@@ -98,13 +98,28 @@ enum WebService {
             }
     }
     
-    public static func requestCall_JSON_ReadOnly(
+    public static func requestCall_ReadOnly(
         path: Endpoint,
         method: Method = .get,
         completion: @escaping ((Result) -> Void)
     ) {
         requestCall(
             path: path.rawValue,
+            method: method,
+            contentType: .json,
+            data: nil,
+            completion: completion)
+    }
+    
+    //Para fazer GET no ChartRemoteDataSource
+    public static func requestCall_ReadOnly_HabitValues(
+        path: String,
+        method: Method = .get,
+        completion: @escaping ((Result) -> Void)
+    ) {
+     
+        requestCall(
+            path: path,
             method: method,
             contentType: .json,
             data: nil,

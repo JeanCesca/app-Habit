@@ -20,10 +20,10 @@ struct BoxChartView: UIViewRepresentable {
         view.chartDescription.enabled = false
         view.xAxis.granularity = 2
         view.xAxis.labelPosition = .bottom
+        view.xAxis.valueFormatter = DateAxisValueFormatter(dates: dates)
         view.rightAxis.enabled = false
         view.leftAxis.axisLineColor = .orange
         view.animate(yAxisDuration: 1.0)
-        
         view.data = addData()
         return view
     }
@@ -40,7 +40,7 @@ struct BoxChartView: UIViewRepresentable {
         dataSet.circleRadius = 4
         dataSet.setColor(.orange)
         dataSet.circleColors = [.red]
-        dataSet.valueFont = .systemFont(ofSize: 12, weight: .light)
+        dataSet.valueFont = .systemFont(ofSize: 10, weight: .light)
         dataSet.drawHorizontalHighlightIndicatorEnabled = false
         dataSet.drawFilledEnabled = true
         dataSet.fillColor = .orange
@@ -59,8 +59,43 @@ struct BoxChartView_Previews: PreviewProvider {
             ChartDataEntry(x: 2.0, y: 3.0),
             ChartDataEntry(x: 3.0, y: 1.0),
         ]), dates: .constant([
+            "01/01/2021",
+            "01/01/2021",
             "01/01/2021"
         ]))
         .frame(maxWidth: .infinity, maxHeight: 340)
     }
 }
+
+class DateAxisValueFormatter: AxisValueFormatter {
+    
+    private let dates: [String]
+    
+    init(dates: [String]) {
+        self.dates = dates
+    }
+    
+    func stringForValue(_ value: Double, axis: AxisBase?) -> String {
+        let position = Int(value)
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        if position > 0 && position < dates.count {
+            let date = dateFormatter.date(from: dates[position])
+            
+            guard let date = date else { return "" }
+            
+            let dF = DateFormatter()
+            dF.dateFormat = "dd/MM"
+            
+            let createdAt = dF.string(from: date)
+            return createdAt
+        } else {
+            return ""
+        }
+        
+    }
+}
+
+
