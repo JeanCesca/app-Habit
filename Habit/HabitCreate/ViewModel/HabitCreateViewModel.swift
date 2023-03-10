@@ -11,7 +11,7 @@ import Combine
 
 class HabitCreateViewModel: ObservableObject {
     
-    @Published var uiState: HabitDetailUIState = .none
+    @Published var uiState: HabitCreateUIState = .none
     
     @Published var name: String = ""
     @Published var label: String = ""
@@ -20,14 +20,14 @@ class HabitCreateViewModel: ObservableObject {
     @Published var imageData: Data? = nil
     @Published var text: String? = "Carregue sua foto"
     
-    private var interactor: HabitDetailInteractor
+    private var interactor: HabitCreateInteractor
     private var cancellable: AnyCancellable?
     
     var cancellables = Set<AnyCancellable>()
     var habitPublisher: PassthroughSubject<Bool, Never>?
     
     
-    init(interactor: HabitDetailInteractor) {
+    init(interactor: HabitCreateInteractor) {
         self.interactor = interactor
     }
     
@@ -37,8 +37,24 @@ class HabitCreateViewModel: ObservableObject {
         }
     }
     
-    public func save() {
+    public func saveHabit() {
         self.uiState = .loading
         
+        cancellable = interactor.saveHabits(habitCreate: HabitCreateRequest(
+            imageData: imageData,
+            name: name,
+            label: label))
+        .receive(on: DispatchQueue.main)
+        .sink(receiveCompletion: { [weak self] completion in
+            switch completion {
+            case .failure(let error):
+                self?.uiState = .error(error.message)
+            case .finished:
+                break
+            }
+        }, receiveValue: { [weak self] _ in
+            self?.uiState = .success
+            self?.habitPublisher?.send(true)
+        })
     }
 }

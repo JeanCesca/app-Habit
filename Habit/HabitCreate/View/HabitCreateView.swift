@@ -33,7 +33,7 @@ struct HabitCreateView: View {
                     habitUnit
                     
                     LoadingButtonView(action: {
-                        
+                        vm.saveHabit()
                     }, text: "Salvar", showProgressBar: self.vm.uiState == .loading, disabled: self.vm.name.isEmpty || self.vm.label.isEmpty)
                     .fontWidth(.expanded)
 //                    cancelButton
@@ -118,7 +118,7 @@ extension HabitCreateView {
 struct HabitCreateView_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(ColorScheme.allCases, id: \.self) {
-            HabitCreateView(vm: HabitCreateViewModel(interactor: HabitDetailInteractor()))
+            HabitCreateView(vm: HabitCreateViewModel(interactor: HabitCreateInteractor()))
                 .preferredColorScheme($0)
         }
     }

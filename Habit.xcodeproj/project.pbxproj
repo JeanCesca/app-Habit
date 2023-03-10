@@ -18,6 +18,10 @@
 		0F15E2C329BB700800C701F1 /* BackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F15E2C229BB700800C701F1 /* BackgroundColor.swift */; };
 		0F15E2C529BB759200C701F1 /* HabitViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F15E2C429BB759200C701F1 /* HabitViewRouter.swift */; };
 		0F15E2C729BB9EC700C701F1 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F15E2C629BB9EC700C701F1 /* ImagePickerView.swift */; };
+		0F15E2C929BBB10800C701F1 /* HabitCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F15E2C829BBB10800C701F1 /* HabitCreateRequest.swift */; };
+		0F15E2CC29BBB16F00C701F1 /* HabitCreateRemoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F15E2CB29BBB16F00C701F1 /* HabitCreateRemoteDataSource.swift */; };
+		0F15E2CE29BBBB1900C701F1 /* HabitCreateInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F15E2CD29BBBB1900C701F1 /* HabitCreateInteractor.swift */; };
+		0F15E2D029BBBC9700C701F1 /* HabitCreateUIState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F15E2CF29BBBC9700C701F1 /* HabitCreateUIState.swift */; };
 		0F1C9A6F28F4D2BC00426F9A /* HabitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1C9A6E28F4D2BC00426F9A /* HabitApp.swift */; };
 		0F1C9A7328F4D2BD00426F9A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F1C9A7228F4D2BD00426F9A /* Assets.xcassets */; };
 		0F1C9A7628F4D2BD00426F9A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F1C9A7528F4D2BD00426F9A /* Preview Assets.xcassets */; };
@@ -101,6 +105,10 @@
 		0F15E2C229BB700800C701F1 /* BackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundColor.swift; sourceTree = "<group>"; };
 		0F15E2C429BB759200C701F1 /* HabitViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewRouter.swift; sourceTree = "<group>"; };
 		0F15E2C629BB9EC700C701F1 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
+		0F15E2C829BBB10800C701F1 /* HabitCreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCreateRequest.swift; sourceTree = "<group>"; };
+		0F15E2CB29BBB16F00C701F1 /* HabitCreateRemoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCreateRemoteDataSource.swift; sourceTree = "<group>"; };
+		0F15E2CD29BBBB1900C701F1 /* HabitCreateInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCreateInteractor.swift; sourceTree = "<group>"; };
+		0F15E2CF29BBBC9700C701F1 /* HabitCreateUIState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCreateUIState.swift; sourceTree = "<group>"; };
 		0F1C9A6B28F4D2BC00426F9A /* Habit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Habit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F1C9A6E28F4D2BC00426F9A /* HabitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitApp.swift; sourceTree = "<group>"; };
 		0F1C9A7228F4D2BD00426F9A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -200,6 +208,7 @@
 		0F15E2B929BB5FF200C701F1 /* HabitCreate */ = {
 			isa = PBXGroup;
 			children = (
+				0F15E2CA29BBB16100C701F1 /* Interactor */,
 				0F15E2BC29BB600100C701F1 /* View */,
 				0F15E2BB29BB5FFD00C701F1 /* ViewModel */,
 				0F15E2BA29BB5FFA00C701F1 /* Model */,
@@ -210,6 +219,8 @@
 		0F15E2BA29BB5FFA00C701F1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0F15E2C829BBB10800C701F1 /* HabitCreateRequest.swift */,
+				0F15E2CF29BBBC9700C701F1 /* HabitCreateUIState.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -236,6 +247,15 @@
 				0F15E2C229BB700800C701F1 /* BackgroundColor.swift */,
 			);
 			path = BackgroundColor;
+			sourceTree = "<group>";
+		};
+		0F15E2CA29BBB16100C701F1 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				0F15E2CB29BBB16F00C701F1 /* HabitCreateRemoteDataSource.swift */,
+				0F15E2CD29BBBB1900C701F1 /* HabitCreateInteractor.swift */,
+			);
+			path = Interactor;
 			sourceTree = "<group>";
 		};
 		0F1C9A6228F4D2BC00426F9A = {
@@ -833,9 +853,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F9E7A9D29AE3F1A000162DA /* Date+.swift in Sources */,
+				0F15E2CC29BBB16F00C701F1 /* HabitCreateRemoteDataSource.swift in Sources */,
 				0F63F6D5299D0FE900B633B8 /* WebService.swift in Sources */,
 				0F15E2B629BA554500C701F1 /* ChartInteractor.swift in Sources */,
 				0F1C9A8328F4D40300426F9A /* SplashUIState.swift in Sources */,
+				0F15E2C929BBB10800C701F1 /* HabitCreateRequest.swift in Sources */,
 				0F63F6EC299E596C00B633B8 /* SignUpInteractor.swift in Sources */,
 				0F4A210E28F5C13E009DCE98 /* HomeViewModel.swift in Sources */,
 				0F1C9A6F28F4D2BC00426F9A /* HabitApp.swift in Sources */,
@@ -859,6 +881,7 @@
 				0F9E7A9B29AE3715000162DA /* HabitInteractor.swift in Sources */,
 				0F4A210C28F5C131009DCE98 /* HomeView.swift in Sources */,
 				0F63F70D299FEC2500B633B8 /* HabitCardView.swift in Sources */,
+				0F15E2CE29BBBB1900C701F1 /* HabitCreateInteractor.swift in Sources */,
 				0F15E2BE29BB601200C701F1 /* HabitCreateView.swift in Sources */,
 				0F9E7AAA29AE6A28000162DA /* HabitCardViewRouter.swift in Sources */,
 				0F9E7AA329AE5239000162DA /* HabitDetailUIState.swift in Sources */,
@@ -889,6 +912,7 @@
 				0F9E7AB329AFA8AB000162DA /* ImageView.swift in Sources */,
 				0F9E7ABB29AFC8B1000162DA /* ProfileView.swift in Sources */,
 				0F63F701299FACBA00B633B8 /* HabitView.swift in Sources */,
+				0F15E2D029BBBC9700C701F1 /* HabitCreateUIState.swift in Sources */,
 				0F4A211828F5DF02009DCE98 /* Gender.swift in Sources */,
 				0F9E7A9929AE348D000162DA /* HabitRemoteDataSource.swift in Sources */,
 				0F4A20F628F595CC009DCE98 /* SplashViewModel.swift in Sources */,

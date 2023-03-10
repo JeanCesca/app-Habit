@@ -84,7 +84,7 @@ enum WebService {
                     
                     if let response = response as? HTTPURLResponse {
                         switch response.statusCode {
-                        case 200:
+                        case 200, 201:
                             completion(.success(data))
                         case 400:
                             completion(.failure(.badRequest, data))
