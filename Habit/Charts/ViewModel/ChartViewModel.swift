@@ -42,7 +42,21 @@ class ChartViewModel: ObservableObject {
                     self?.uiState = .error(error.message)
                 }
             } receiveValue: { [weak self] response in
-                self?.uiState = .fullChart
+                if response.isEmpty {
+                    self?.uiState = .emptyChart
+                } else {
+                    self?.uiState = .fullChart
+                    
+                    //mapping [HabitValueResponse] -> [String]
+                    let mappedResponse = response.map({ return $0.createdDate })
+                    self?.dates = mappedResponse
+                    
+                    //indice para X e Y
+                    self?.entries = zip(response.startIndex..<response.endIndex, response)
+                        .map { index, response in
+                            ChartDataEntry(x: Double(index), y: Double(response.value))
+                        }
+                }
             }
     }
 }

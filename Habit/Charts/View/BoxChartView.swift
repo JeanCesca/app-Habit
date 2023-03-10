@@ -18,7 +18,7 @@ struct BoxChartView: UIViewRepresentable {
         view.backgroundColor = .tertiarySystemFill
         view.legend.enabled = false
         view.chartDescription.enabled = false
-        view.xAxis.granularity = 2
+        view.xAxis.granularity = 1
         view.xAxis.labelPosition = .bottom
         view.xAxis.valueFormatter = DateAxisValueFormatter(dates: dates)
         view.rightAxis.enabled = false
@@ -79,7 +79,7 @@ class DateAxisValueFormatter: AxisValueFormatter {
         let position = Int(value)
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
         
         if position > 0 && position < dates.count {
             let date = dateFormatter.date(from: dates[position])
