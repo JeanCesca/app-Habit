@@ -24,7 +24,7 @@ struct GenderSelectorView: View {
                         Spacer()
                         Image(systemName: "checkmark")
                             .foregroundColor(
-                                selectedGender == gender ? .orange : .white
+                                selectedGender == gender ? Color("buttonColor") : .white
                             )
                     }
                     .contentShape(Rectangle())

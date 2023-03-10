@@ -38,21 +38,26 @@ struct HabitCardView: View {
                 HStack {
                     ImageView(url: vm.icon)
                         .aspectRatio(contentMode: .fill)
-                        .frame(width: 52, height: 52)
+                        .frame(width: 70, height: 70)
                         .clipShape(Circle())
                     
                     Spacer()
                     
                     HStack(alignment: .top) {
-                        VStack(alignment: .leading, spacing: 5) {
+                        VStack(alignment: .leading, spacing: 12) {
                             Text(vm.name)
                                 .foregroundColor(Color("buttonColor"))
                                 .bold()
+                                .fontWidth(.expanded)
+                                .font(.footnote)
                             Text(vm.label)
                                 .foregroundColor(Color("textColor"))
-                                .bold()
+                                .fontWidth(.expanded)
+                                .font(.footnote)
                             Text(vm.date)
                                 .foregroundColor(Color("textColor"))
+                                .fontWidth(.expanded)
+                                .font(.footnote)
                                 .fontWeight(.light)
                         }
                         .multilineTextAlignment(.leading)
@@ -60,35 +65,35 @@ struct HabitCardView: View {
                         
                         Spacer()
                         
-                        VStack(alignment: .leading, spacing: 5) {
+                        VStack(alignment: .leading, spacing: 12) {
                             Text("Registrado")
                                 .foregroundColor(Color("buttonColor"))
+                                .fontWidth(.expanded)
                                 .bold()
+                                .font(.footnote)
                                 .multilineTextAlignment(.leading)
                             Text(vm.value)
                                 .foregroundColor(Color("textColor"))
-                                .bold()
+                                .fontWidth(.expanded)
+                                .font(.footnote)
                                 .multilineTextAlignment(.leading)
                         }
                         Spacer(minLength: 30)
                     }
                 }
                 .padding(10)
-                .background(
-                    Color.red.opacity(0.03)
-                )
-                .cornerRadius(20)
             }
             if !isChart {
-                Rectangle()
+                RoundedRectangle(cornerRadius: 50)
                     .frame(width: 14, height: 14)
-                    .cornerRadius(20)
+                    .padding(.trailing, 20)
                     .foregroundColor(vm.state)
             }
         }
         .background(
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(Color.orange.opacity(0.6), lineWidth: 1.4)
+            BackgroundColor()
+                .frame(maxWidth: .infinity)
+                .cornerRadius(70)
         )
     }
 }

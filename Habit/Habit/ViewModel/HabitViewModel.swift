@@ -15,6 +15,7 @@ class HabitViewModel: ObservableObject {
     
     @Published var uiState: HabitUIState = .loading
     
+    @Published var image: UIImage = UIImage(systemName: "person.fill")!
     @Published var description: String = ""
     @Published var opened: Bool = false
     
@@ -86,7 +87,8 @@ class HabitViewModel: ObservableObject {
         response.map { habit -> HabitCardViewModel in
             
             var state: Color = .green
-            self.description = "Seus hábitos estão em dia"
+            self.image = UIImage(systemName: "face.smiling.inverse")!
+            self.description = "Seus hábitos estão em dia."
             
             let lastDate = habit.lastDate?.dateToString(
                 source: "yyyy-MM-dd'T'HH:mm:ss",
@@ -96,6 +98,7 @@ class HabitViewModel: ObservableObject {
             
             if dateToCompare < Date() {
                 state = .red
+                self.image = UIImage(systemName: "exclamationmark.triangle")!
                 self.description = "Você está atrasado nos seus hábitos!"
             }
             
@@ -109,5 +112,12 @@ class HabitViewModel: ObservableObject {
                 value: "\(habit.value ?? 0)",
                 state: state)
         }
+    }
+}
+
+extension HabitViewModel {
+    
+    public func habitCreateView() -> some View {
+        return HabitViewRouter.makeHabitCreateView(habitPublisher: habitPublisher)
     }
 }

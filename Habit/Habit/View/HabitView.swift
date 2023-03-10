@@ -14,6 +14,8 @@ struct HabitView: View {
     var body: some View {
         
         ZStack {
+            BackgroundColor()
+                .ignoresSafeArea()
             if case HabitUIState.loading = vm.uiState {
                 progressView
             } else {
@@ -36,7 +38,6 @@ struct HabitView: View {
                                         HabitCardView(vm: row, isChart: vm.isCharts)
                                     }
                                 }
-                                .padding(.horizontal, 16)
                                 
                             } else if case HabitUIState.error(let message) = vm.uiState {
                                 Text("")
@@ -45,6 +46,7 @@ struct HabitView: View {
                                     }
                             }
                         }
+                        .padding()
                     }
                     .navigationTitle("Meus hábitos")
                 }
@@ -67,22 +69,20 @@ extension HabitView {
 extension HabitView {
     var topContainer: some View {
         VStack(alignment: .center, spacing: 12) {
-            Image(systemName: "exclamationmark.triangle")
+            Image(uiImage: vm.image)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 40, height: 40, alignment: .center)
-                .foregroundColor(Color("buttonColor"))
             Text(vm.description)
-                .font(.callout)
-                .foregroundColor(Color("buttonColor"))
+                .fontWidth(.expanded)
         }
+        .foregroundColor(Color("buttonColor"))
         .frame(maxWidth: .infinity)
         .padding(.vertical, 32)
         .overlay {
-            RoundedRectangle(cornerRadius: 40)
-                .stroke(Color.gray, lineWidth: 1)
+            RoundedRectangle(cornerRadius: 50)
+                .stroke(Color("buttonColor"), lineWidth: 0.5)
         }
-        .padding(.horizontal, 16)
         .padding(.top, 16)
     }
 }
@@ -90,13 +90,16 @@ extension HabitView {
 extension HabitView {
     var addButton: some View {
         NavigationLink {
-            Text("Tela de add")
-                .frame(maxWidth: .infinity)
+            vm.habitCreateView()
         } label: {
-            Label("Criar hábito", systemImage: "plus.app")
-                .modifier(ButtonStyle())
+            Image(systemName: "plus.circle.fill")
+                .resizable()
+                .frame(width: 40, height: 40)
+                .foregroundColor(Color("buttonColor"))
+                .cornerRadius(50)
         }
-        .padding(16)
+        .padding(.vertical, 20)
+        .fontWidth(.expanded)
     }
 }
 
@@ -107,9 +110,10 @@ extension HabitView {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 14, height: 14, alignment: .center)
-            
             Text("Nenhum hábito encontrado :(")
+                .fontWidth(.expanded)
         }
+        .foregroundColor(Color("buttonColor"))
     }
 }
 

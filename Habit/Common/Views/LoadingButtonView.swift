@@ -24,9 +24,7 @@ struct LoadingButtonView: View {
                     .frame(height: 26)
                     .foregroundColor(.white)
                     .padding(.vertical, 14)
-                    .padding(.horizontal, 16)
-                    .font(.title3)
-                    .fontWeight(.semibold)
+                    .fontWidth(.expanded)
                     .background(
                         disabled ? Color("buttonColor").opacity(0.5) : Color("buttonColor")
                     )

@@ -14,8 +14,8 @@ struct CustomTextFieldStyle: TextFieldStyle {
             .padding(.horizontal, 10)
             .padding(.vertical, 16)
             .background(
-                RoundedRectangle(cornerRadius: 20)
-                    .foregroundColor(Color("backgroundTextField"))
+                BackgroundColor()
+                    .cornerRadius(20)
             )
     }
     

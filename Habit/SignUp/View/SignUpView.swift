@@ -14,27 +14,25 @@ struct SignUpView: View {
     var body: some View {
         
         ZStack {
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .center) {
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Cadastro")
-                            .foregroundColor(.black)
-                            .font(Font.system(.title).bold())
-                            .padding(.bottom, 20)
-                        
-                        fullNameTextField
-                        emailTextField
-                        passwordTextField
-                        documentTextField
-                        phoneTextField
-                        birthdayTextField
-                        genderPicker
-                        
-                        enterButton
+            NavigationView {
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .center) {
+                        VStack(alignment: .leading, spacing: 10) {
+                            fullNameTextField
+                            emailTextField
+                            passwordTextField
+                            documentTextField
+                            phoneTextField
+                            birthdayTextField
+                            genderPicker
+                            
+                            enterButton
+                        }
+                        Spacer()
                     }
-                    Spacer()
+                    .padding()
                 }
-                .padding()
+                .navigationTitle("Cadastro")
             }
             
             if case SignUpUIState.error(let error) = vm.uiState {
@@ -57,6 +55,8 @@ extension SignUpView {
             failure: vm.fullName.count < 3,
             keyboard: .default,
             text: $vm.fullName)
+        .fontWidth(.expanded)
+        .padding(2)
     }
 }
 
@@ -68,6 +68,7 @@ extension SignUpView {
             failure: !vm.email.isEmail(),
             keyboard: .emailAddress,
             text: $vm.email)
+        .fontWidth(.expanded)
     }
 }
 
@@ -80,6 +81,7 @@ extension SignUpView {
             keyboard: .default,
             isSecure: true,
             text: $vm.password)
+        .fontWidth(.expanded)
     }
 }
 
@@ -91,18 +93,20 @@ extension SignUpView {
             failure: vm.document.count != 11,
             keyboard: .numberPad,
             text: $vm.document)
+        .fontWidth(.expanded)
     }
 }
 
 extension SignUpView {
     var phoneTextField: some View {
         EditTextView(
-            placeholder: "(00) 00000-0000",
+            placeholder: "Cel. (00) 00000-0000",
             error: "Número com o DDD + 8 ou 9 dígitos",
             failure: vm.phone.count < 10 || vm.phone.count >= 12,
             keyboard: .emailAddress,
             isSecure: false,
             text: $vm.phone)
+        .fontWidth(.expanded)
     }
 }
 
@@ -115,6 +119,7 @@ extension SignUpView {
             keyboard: .numberPad,
             isSecure: false,
             text: $vm.birthday)
+        .fontWidth(.expanded)
     }
 }
 
@@ -124,8 +129,10 @@ extension SignUpView {
             ForEach(Gender.allCases, id: \.self) { value in
                 Text("\(value.rawValue)")
                     .tag(value)
+                    .font(.title)
             }
         }
+        
         .pickerStyle(.menu)
         .padding(.top, 18)
         .padding(.bottom, 18)
@@ -146,7 +153,9 @@ extension SignUpView {
                           vm.phone.count < 10 ||
                           vm.phone.count >= 12 ||
                           vm.birthday.count != 10
-    )}
+    )
+        .fontWidth(.expanded)
+    }
 }
 
 struct SignUpView_Previews: PreviewProvider {

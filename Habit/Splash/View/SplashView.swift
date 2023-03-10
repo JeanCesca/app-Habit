@@ -36,11 +36,34 @@ struct SplashView: View {
 extension SplashView {
     func loadingView(error: String? = nil) -> some View {
         ZStack {
-            Image("doglogin")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 200, height: 200)
-            
+            Color("buttonColor").opacity(0.5)
+                .ignoresSafeArea()
+            VStack(spacing: 30) {
+                Image(systemName: "figure.mixed.cardio")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 80, height: 80)
+                Image(systemName: "figure.gymnastics")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 80, height: 80)
+                Text("H  a  b  i  t  s") 
+                    .font(.title)
+                    .fontWeight(.semibold)
+                    .padding()
+                    .fontWidth(.expanded)
+                    .italic()
+                Image(systemName: "figure.dance")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 80, height: 80)
+                Image(systemName: "figure.strengthtraining.functional")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 80, height: 80)
+            }
+
+        
             if let error = error {
                 Text("")
                     .alert(isPresented: .constant(true)) {

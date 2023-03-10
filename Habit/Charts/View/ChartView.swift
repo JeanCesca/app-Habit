@@ -15,6 +15,8 @@ struct ChartView: View {
     var body: some View {
         
         ZStack {
+            BackgroundColor()
+                .ignoresSafeArea()
             if case ChartUIState.loading = vm.uiState {
                 ProgressView()
             } else {

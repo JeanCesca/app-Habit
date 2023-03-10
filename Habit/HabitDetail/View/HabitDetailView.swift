@@ -17,56 +17,70 @@ struct HabitDetailView: View {
     }
     
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(alignment: .center, spacing: 12) {
-                Text(vm.name)
-                    .foregroundColor(Color("buttonColor"))
-                    .font(.title3.bold())
+        ZStack {
+            BackgroundColor()
+                .ignoresSafeArea()
+            ScrollView(showsIndicators: false) {
+                    header
                 
-                Text("Unidade: \(vm.label)\n")
-            }
-            
-            VStack {
-                TextField("Escreva aqui o valor conquistado", text: $vm.value)
-                    .multilineTextAlignment(.center)
-                    .textFieldStyle(.plain)
-                    .keyboardType(.numberPad)
-                Divider()
-                    .frame(height: 1)
-                    .background(.gray)
-            }
-            .padding(.horizontal)
-            
-            Text("Os registros devem ser feito em até 24h")
-            Text("Hábitos se constroem todos os dias 🐸")
-            
-            LoadingButtonView(action: {
-                self.vm.save()
-            }, text: "Salvar", showProgressBar: self.vm.uiState == .loading, disabled: self.vm.value.isEmpty)
-            .padding(.horizontal)
-            .padding(.top, 28)
-            
-            Button("Cancelar") {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-                    withAnimation(.easeOut(duration: 1)) {
-                        self.dismiss()
-                    }
+                VStack {
+                    TextField("Valor conquistado", text: $vm.value)
+                        .multilineTextAlignment(.leading)
+                        .textFieldStyle(.plain)
+                        .keyboardType(.numberPad)
+                        .fontWidth(.expanded)
+                    Divider()
+                        .frame(height: 1)
+                        .background(.gray)
                 }
+                
+                VStack {
+                    Text("Os registros devem ser feito em até 24h.")
+                        .foregroundColor(.accentColor)
+                }
+
+                VStack(spacing: 10) {
+                    LoadingButtonView(action: {
+                        self.vm.save()
+                    }, text: "Salvar", showProgressBar: self.vm.uiState == .loading, disabled: self.vm.value.isEmpty)
+                    
+                    Button("Cancelar") {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                            withAnimation(.easeOut(duration: 1)) {
+                                self.dismiss()
+                            }
+                        }
+                    }
+                    .modifier(ButtonStyle())
+                }
+                .padding(.top, 12)
+                Spacer()
             }
-            .modifier(ButtonStyle())
-            .padding()
-            
-            Spacer()
+            .padding(.top, 60)
+            .onAppear {
+                vm.$uiState
+                    .sink { uiState in
+                        if uiState == .success {
+                            self.dismiss()
+                        }
+                    }
+                    .store(in: &vm.cancellables)
         }
-        .padding(.top, 60)
-        .onAppear {
-            vm.$uiState
-                .sink { uiState in
-                    if uiState == .success {
-                        self.dismiss()
-                    }
-                }
-                .store(in: &vm.cancellables)
+            .padding(.horizontal, 20)
+        }
+    }
+}
+
+extension HabitDetailView {
+    var header: some View {
+        VStack(alignment: .center, spacing: 12) {
+            Text(vm.name)
+                .foregroundColor(Color("buttonColor"))
+                .fontWidth(.expanded)
+                .bold()
+            Text("Unidade: \(vm.label)\n")
+                .fontWidth(.expanded)
+                .fontWeight(.light)
         }
     }
 }

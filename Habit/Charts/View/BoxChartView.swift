@@ -43,7 +43,7 @@ struct BoxChartView: UIViewRepresentable {
         dataSet.valueFont = .systemFont(ofSize: 10, weight: .light)
         dataSet.drawHorizontalHighlightIndicatorEnabled = false
         dataSet.drawFilledEnabled = true
-        dataSet.fillColor = .orange
+        dataSet.fillColor = UIColor(Color("buttonColor"))
         
         return LineChartData(dataSet: dataSet)
     }

@@ -22,8 +22,9 @@ struct SignInView: View {
             } else {
                 NavigationView {
                     ScrollView(showsIndicators: false) {
-                                                
+                        Spacer(minLength: 140)
                         imageLogo
+                        Spacer(minLength: 70)
                         emailTextField
                         passwordTextField
                         enterButton
@@ -50,10 +51,11 @@ struct SignInView: View {
 extension SignInView {
     var imageLogo: some View {
         VStack(alignment: .center) {
-            Image("doglogin")
+            Image(systemName: "figure.badminton")
                 .resizable()
                 .scaledToFit()
-                .padding(80)
+                .frame(width: 140, height: 140)
+                .foregroundColor(Color("buttonColor"))
         }
     }
 }
@@ -67,6 +69,7 @@ extension SignInView {
             keyboard: .emailAddress,
             isSecure: false,
             text: $vm.email)
+        .fontWidth(.expanded)
     }
 }
 
@@ -79,6 +82,7 @@ extension SignInView {
             keyboard: .emailAddress,
             isSecure: true,
             text: $vm.password)
+        .fontWidth(.expanded)
     }
 }
 
@@ -90,6 +94,7 @@ extension SignInView {
         text: "Entrar",
         showProgressBar: self.vm.uiState == SignInUIState.loading,
         disabled: !vm.email.isEmail() || vm.password.count < 8)
+        .fontWidth(.expanded)
     }
 }
 
@@ -108,6 +113,7 @@ extension SignInView {
                 Button("Cadastre-se!") {
                     self.action = 1
                 }
+                .fontWidth(.expanded)
             }
         }
     }

@@ -12,12 +12,12 @@ import Foundation
 
 enum Gender: String, CaseIterable, Identifiable {
     
-    case cisMale = "Homem Cisgênero"
-    case cisFem = "Mulher Cisgênero"
+    case cisMale = "Homem Cis"
+    case cisFem = "Mulher Ciso"
     case nonBinary = "Não Binárie"
-    case transFem = "Mulher Transgênera"
-    case transMale = "Homem Transgênero"
-
+    case transFem = "Mulher Trans"
+    case transMale = "Homem Trans"
+    case notInformed = "Não informado"
     
     var id: String {
         self.rawValue
