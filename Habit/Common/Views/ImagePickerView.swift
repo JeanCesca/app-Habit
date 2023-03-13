@@ -57,8 +57,16 @@ class ImagePickerViewCoordinator: NSObject, UIImagePickerControllerDelegate, UIN
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            self.image = Image(uiImage: pickedImage)
-            self.imageData = pickedImage.jpegData(compressionQuality: 0.5)
+            
+            let width: CGFloat = 420.0
+            let canva = CGSize(width: width, height: CGFloat(ceil(width / pickedImage.size.width * pickedImage.size.height)))
+            
+            let imgResized = UIGraphicsImageRenderer(size: canva, format: pickedImage.imageRendererFormat).image { _ in
+                pickedImage.draw(in: CGRect(origin: .zero, size: canva))
+            }
+            
+            self.image = Image(uiImage: imgResized)
+            self.imageData = imgResized.jpegData(compressionQuality: 0.2)
             self.text = "Foto carregada com sucesso 💅"
             self.isPresented = false
         }

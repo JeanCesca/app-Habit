@@ -13,7 +13,7 @@ import Foundation
 enum Gender: String, CaseIterable, Identifiable {
     
     case cisMale = "Homem Cis"
-    case cisFem = "Mulher Ciso"
+    case cisFem = "Mulher Cis"
     case nonBinary = "Não Binárie"
     case transFem = "Mulher Trans"
     case transMale = "Homem Trans"

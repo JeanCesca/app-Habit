@@ -23,12 +23,7 @@ struct ChartView: View {
                 
                 if case ChartUIState.emptyChart = vm.uiState {
                     VStack {
-                        Image(systemName: "exclamationmark.octagon")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 14, height: 14, alignment: .center)
-                        
-                        Text("Nenhum hábito encontrado :(")
+                        Text("Nenhum hábito encontrado.")
                     }
                 } else if case ChartUIState.error(let error) = vm.uiState {
                     showAlert(title: "Erro ao carregar!", message: "👾👾👾👾👾\n(\(error))")

@@ -33,7 +33,7 @@ struct HabitView: View {
                                 alertHeader
                                 
                             } else if case HabitUIState.fullList(let listRow) = vm.uiState {
-                                LazyVStack(spacing: 12) {
+                                VStack(spacing: 12) {
                                     ForEach(listRow) { row in
                                         HabitCardView(vm: row, isChart: vm.isCharts)
                                     }
@@ -73,6 +73,7 @@ extension HabitView {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 40, height: 40, alignment: .center)
+                .foregroundColor(Color("buttonColor"))
             Text(vm.description)
                 .fontWidth(.expanded)
         }
@@ -106,11 +107,7 @@ extension HabitView {
 extension HabitView {
     var alertHeader: some View {
         VStack {
-            Image(systemName: "exclamationmark.octagon")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 14, height: 14, alignment: .center)
-            Text("Nenhum hábito encontrado :(")
+            Text("Nenhum hábito encontrado.")
                 .fontWidth(.expanded)
         }
         .foregroundColor(Color("buttonColor"))

@@ -66,6 +66,7 @@ class HabitViewModel: ObservableObject {
             }, receiveValue: { [weak self] response in
                 if response.isEmpty {
                     self?.uiState = .emptyList
+                    self?.image = UIImage(systemName: "exclamationmark.octagon")!
                     self?.description = "Você ainda não possui hábitos!"
                 } else {
                     self?.uiState = .fullList(
