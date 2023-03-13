@@ -19,7 +19,6 @@ enum WebService {
         case refreshToken = "/auth/refresh-token"
         case habits = "/users/me/habits"
         case habitValues = "/users/me/habits/%d/values"
-        
     }
     
     enum NetworkError {
@@ -37,7 +36,9 @@ enum WebService {
     enum ContentType: String {
         case json = "application/json"
         case formUrl = "application/x-www-form-urlencoded"
+        case multipart = "multipart/form-data"
     }
+    
     
     enum Method: String {
         case get = "GET"
@@ -56,6 +57,7 @@ enum WebService {
         method: Method,
         contentType: ContentType,
         data: Data?,
+        boundary: String = "",
         completion: @escaping (Result) -> Void
     ) {
         // 1. criar uma URL que irá esperar os valores do JSON
@@ -68,11 +70,16 @@ enum WebService {
                     urlRequest.setValue("\(userAuth.tokenType) \(userAuth.idToken)", forHTTPHeaderField: "Authorization")
                 }
                 
+                if contentType == .multipart {
+                    urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+                } else {
+                    urlRequest.setValue(contentType.rawValue, forHTTPHeaderField: "Content-Type")
+                }
+                
                 //definir as propriedades para a CHAMADA da URL
                 //REQUEST
                 urlRequest.httpMethod = method.rawValue
                 urlRequest.setValue("application/json", forHTTPHeaderField: "accept")
-                urlRequest.setValue(contentType.rawValue, forHTTPHeaderField: "Content-Type")
                 urlRequest.httpBody = data //formato FormData: chave=valor&chave=valor
                 
                 // 2. Conectar com o servidor para ter uma resposta de volta (RESPONSE)
@@ -166,6 +173,7 @@ enum WebService {
         path: Endpoint,
         method: Method = .post,
         params: [URLQueryItem],
+        data: Data? = nil,
         completion: @escaping ((Result) -> Void)
     ) {
         
@@ -174,12 +182,50 @@ enum WebService {
         
         var components = URLComponents(string: absoluteUrl)
         components?.queryItems = params
+        
+        let boundary: String = "Boundary-\(NSUUID().uuidString)"
                 
         requestCall(
             path: path.rawValue,
             method: method,
-            contentType: .formUrl,
-            data: components?.query?.data(using: .utf8),
+            contentType: data != nil ? .multipart : .formUrl,
+            data: data != nil ? createBodyWithParameters(
+                params: params,
+                data: data!,
+                boundary: boundary) : components?.query?.data(using: .utf8),
+            boundary: boundary,
             completion: completion)
+    }
+    
+    private static func createBodyWithParameters(params: [URLQueryItem],
+                                                 data: Data,
+                                                 boundary: String) -> Data {
+        let body = NSMutableData()
+        for param in params {
+            body.appendString("--\(boundary)\r\n")
+            body.appendString("Content-Disposition: form-data; name=\"\(param.name)\"\r\n\r\n")
+            body.appendString("\(param.value!)\r\n")
+        }
+        
+        let filename = "img.jpg"
+        let mimetype = "image/jpeg"
+        
+        body.appendString("--\(boundary)\r\n")
+        body.appendString("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n")
+        
+        body.appendString("Content-Type: \(mimetype)\r\n\r\n")
+        body.append(data)
+        
+        body.appendString("\r\n")
+        
+        body.appendString("--\(boundary)--\r\n")
+        
+        return body as Data
+    }
+}
+
+extension NSMutableData {
+    func appendString(_ string: String) {
+        append(string.data(using: .utf8, allowLossyConversion: true)!)
     }
 }

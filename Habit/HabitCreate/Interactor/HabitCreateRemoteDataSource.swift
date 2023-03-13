@@ -22,7 +22,7 @@ class HabitCreateRemoteDataSource {
         ]
         
         return Future<Void, AppError> { promise in
-            WebService.requestCall_FormData(path: .habits, params: params) { result in
+            WebService.requestCall_FormData(path: .habits, params: params, data: request.imageData) { result in
                 switch result {
                 case .success(_):
                     promise(.success(()))
