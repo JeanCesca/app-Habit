@@ -102,9 +102,13 @@ extension ProfileView {
         HStack {
             Text("Nome")
             Spacer()
-            TextField("Digite seu nome", text: $vm.fullNameValidation.value)
+            ProfileEditTextView(
+                placeholder: "Digite seu nome",
+                mask: nil,
+                keyboard: .alphabet,
+                autoCapitalization: .words,
+                text: $vm.fullNameValidation.value)
                 .multilineTextAlignment(.trailing)
-                .keyboardType(.alphabet)
             if vm.fullNameValidation.failure {
                 Image(systemName: "xmark.seal")
                     .foregroundColor(.red)
@@ -144,9 +148,14 @@ extension ProfileView {
         HStack {
             Text("Telefone")
             Spacer()
-            TextField("ex. (00) 00000 0000", text: $vm.phoneValidation.value)
-                .multilineTextAlignment(.trailing)
-                .keyboardType(.numberPad)
+            ProfileEditTextView(
+                placeholder: "ex. (00) 00000 0000",
+                mask: "(##) #####-####",
+                autoCapitalization: .never,
+                text: $vm.phoneValidation.value)
+            .multilineTextAlignment(.trailing)
+            .keyboardType(.numberPad)
+            
             if vm.phoneValidation.failure {
                 Image(systemName: "xmark.seal")
                     .foregroundColor(.red)
@@ -160,8 +169,14 @@ extension ProfileView {
         HStack {
             Text("Data de Nascimento")
             Spacer()
-            TextField("ex. dd/MM/yyyy", text: $vm.birthdayValidation.value)
+            ProfileEditTextView(
+                placeholder: "ex. dd/MM/yyyy",
+                mask: "##/##/####",
+                keyboard: .numberPad,
+                autoCapitalization: .never,
+                text: $vm.birthdayValidation.value)
                 .multilineTextAlignment(.trailing)
+            
             if vm.birthdayValidation.failure {
                 Image(systemName: "xmark.seal")
                     .foregroundColor(.red)

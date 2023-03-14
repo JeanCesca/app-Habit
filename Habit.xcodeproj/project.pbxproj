@@ -91,6 +91,7 @@
 		0FACA03A29957ACC00B5D3BB /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA03929957ACC00B5D3BB /* String+.swift */; };
 		0FACA03C29957F6800B5D3BB /* LoadingButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FACA03B29957F6800B5D3BB /* LoadingButtonView.swift */; };
 		0FEBA98029BF8C2500706660 /* Mask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEBA97F29BF8C2500706660 /* Mask.swift */; };
+		0FEBA98229BFB3BE00706660 /* ProfileEditTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEBA98129BFB3BE00706660 /* ProfileEditTextView.swift */; };
 		E2FAF648992F4075E36B948D /* Pods_Habit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE59389DA503D79190CD7EBC /* Pods_Habit.framework */; };
 /* End PBXBuildFile section */
 
@@ -181,6 +182,7 @@
 		0FACA03929957ACC00B5D3BB /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		0FACA03B29957F6800B5D3BB /* LoadingButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingButtonView.swift; sourceTree = "<group>"; };
 		0FEBA97F29BF8C2500706660 /* Mask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mask.swift; sourceTree = "<group>"; };
+		0FEBA98129BFB3BE00706660 /* ProfileEditTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditTextView.swift; sourceTree = "<group>"; };
 		78D103A1709B607A148BE7D8 /* Pods-Habit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Habit.debug.xcconfig"; path = "Target Support Files/Pods-Habit/Pods-Habit.debug.xcconfig"; sourceTree = "<group>"; };
 		BE59389DA503D79190CD7EBC /* Pods_Habit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Habit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F04BFC12E460740CE2A32F26 /* Pods-Habit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Habit.release.xcconfig"; path = "Target Support Files/Pods-Habit/Pods-Habit.release.xcconfig"; sourceTree = "<group>"; };
@@ -601,6 +603,7 @@
 			children = (
 				0F9E7ABA29AFC8B1000162DA /* ProfileView.swift */,
 				0F9E7AC129AFD0C6000162DA /* GenderSelectorView.swift */,
+				0FEBA98129BFB3BE00706660 /* ProfileEditTextView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -896,6 +899,7 @@
 				0F15E2BE29BB601200C701F1 /* HabitCreateView.swift in Sources */,
 				0FEBA98029BF8C2500706660 /* Mask.swift in Sources */,
 				0F9E7AAA29AE6A28000162DA /* HabitCardViewRouter.swift in Sources */,
+				0FEBA98229BFB3BE00706660 /* ProfileEditTextView.swift in Sources */,
 				0F9E7AA329AE5239000162DA /* HabitDetailUIState.swift in Sources */,
 				0F15E2B429BA4DBB00C701F1 /* ChartRemoteDataSource.swift in Sources */,
 				0F15E2AD29B24B2E00C701F1 /* ChartViewModel.swift in Sources */,
