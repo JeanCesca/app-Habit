@@ -37,12 +37,12 @@ struct EditTextView: View {
                     .autocorrectionDisabled()
                     .textFieldStyle(CustomTextFieldStyle())
                     .textInputAutocapitalization(autoCapitalization)
-                    .onChange(of: text) { newValue in
-                        if let mask = mask {
-                            //###.###.###-## to 123.123.123-12
-                            Mask.mask(mask: mask, value: newValue, text: &text)
-                        }
-                    }
+//                    .onChange(of: text) { newValue in
+//                        if let mask = mask {
+//                            //###.###.###-## to 123.123.123-12
+//                            Mask.mask(mask: mask, value: newValue, text: &text)
+//                        }
+//                    }
             }
             
             if let error = error, failure == true, !text.isEmpty {

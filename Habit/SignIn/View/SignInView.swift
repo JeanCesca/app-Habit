@@ -62,14 +62,17 @@ extension SignInView {
 
 extension SignInView {
     var emailTextField: some View {
-        EditTextView(
-            placeholder: "✉️ E-mail",
-            error: "E-mail inválido",
-            failure: !vm.email.isEmail(),
-            keyboard: .emailAddress,
-            isSecure: false,
-            text: $vm.email)
-        .fontWidth(.expanded)
+        VStack {
+            EditTextView(
+                placeholder: "✉️ E-mail",
+                error: "E-mail inválido",
+                failure: !vm.email.isEmail(),
+                keyboard: .emailAddress,
+                isSecure: false,
+                text: $vm.email)
+            .fontWidth(.expanded)
+        }
+
     }
 }
 

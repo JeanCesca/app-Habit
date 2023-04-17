@@ -93,7 +93,7 @@ struct HabitCardView: View {
         .background(
             BackgroundColor()
                 .frame(maxWidth: .infinity)
-                .cornerRadius(70)
+                .cornerRadius(20)
         )
     }
 }
@@ -106,29 +106,31 @@ struct HabitCardView_Previews: PreviewProvider {
             NavigationView {
                 List {
                     HabitCardView(vm: HabitCardViewModel(
-                        publisher: PassthroughSubject<Bool, Never>(), id: 1,
-                        icon: "https://via.placeholder.com/150",
+                        id: 1, icon: "https://via.placeholder.com/150",
                         date: "01/01/2023 00:00:00",
                         name: "Ouvir The Knife",
                         label: "horas",
                         value: "2",
-                        state: .green), isChart: false)
+                        state: .green,
+                        publisher: PassthroughSubject<Bool, Never>()), isChart: false)
                     HabitCardView(vm: HabitCardViewModel(
-                        publisher: PassthroughSubject<Bool, Never>(), id: 1,
+                        id: 1,
                         icon: "https://via.placeholder.com/150",
                         date: "01/01/2023 00:00:00",
                         name: "Ouvir The Knife",
                         label: "horas",
                         value: "2",
-                        state: .green), isChart: false)
+                        state: .green,
+                        publisher: PassthroughSubject<Bool, Never>()), isChart: false)
                     HabitCardView(vm: HabitCardViewModel(
-                        publisher: PassthroughSubject<Bool, Never>(), id: 1,
+                        id: 1,
                         icon: "https://via.placeholder.com/150",
                         date: "01/01/2023 00:00:00",
                         name: "Ouvir The Knife",
                         label: "horas",
                         value: "2",
-                        state: .green), isChart: false)
+                        state: .green,
+                        publisher: PassthroughSubject<Bool, Never>()), isChart: false)
                 }
                 .frame(maxWidth: .infinity)
                 .navigationTitle("Lista")

@@ -15,7 +15,7 @@ class HabitViewModel: ObservableObject {
     
     @Published var uiState: HabitUIState = .loading
     
-    @Published var image: UIImage = UIImage(systemName: "person.fill")!
+    @Published var image: UIImage = UIImage(systemName: "person")!
     @Published var description: String = ""
     @Published var opened: Bool = false
     
@@ -79,6 +79,7 @@ class HabitViewModel: ObservableObject {
     public func updateHabits() {
         cancellableNotify = habitPublisher
             .sink(receiveValue: { saved in
+                print("saved: \(saved)")
                 self.fetchHabits()
             })
     }
@@ -104,14 +105,14 @@ class HabitViewModel: ObservableObject {
             }
             
             return HabitCardViewModel(
-                publisher: self.habitPublisher,
                 id: habit.id,
                 icon: habit.iconUrl ?? "",
                 date: lastDate,
                 name: habit.name,
                 label: habit.label,
                 value: "\(habit.value ?? 0)",
-                state: state)
+                state: state,
+                publisher: self.habitPublisher)
         }
     }
 }

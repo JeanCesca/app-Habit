@@ -39,7 +39,6 @@ enum WebService {
         case multipart = "multipart/form-data"
     }
     
-    
     enum Method: String {
         case get = "GET"
         case post = "POST"

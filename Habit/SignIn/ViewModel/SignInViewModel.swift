@@ -61,7 +61,8 @@ class SignInViewModel: ObservableObject {
     }
     
     func addSubscribers() {
-        cancellable = publisher.sink(receiveValue: { value in
+        cancellable = publisher
+            .sink(receiveValue: { value in
             if value {
                 self.uiState = .goToHomeScreen
             } else {
